@@ -1,0 +1,7 @@
+{
+  "name": "nanoeconomy-dataset-collector",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

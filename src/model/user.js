@@ -1,5 +1,5 @@
-var mongoose = require("mongoose");
-var bcrypt = require("bcrypt");
+const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 var userSchema = new mongoose.Schema({
   username: {
@@ -34,7 +34,7 @@ var userSchema = new mongoose.Schema({
   },
   Occupation: {
     type: String,
-  },
+  }
 });
 
 //password hashing using bcrypt
@@ -56,4 +56,4 @@ userSchema.pre("save", function (next) {
   });
 });
 
-module.exports = mongoose.model("User, UserSchema");
+module.exports = mongoose.model("user, userSchema");

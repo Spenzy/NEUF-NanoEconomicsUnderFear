@@ -1,4 +1,4 @@
-var user = require("../models/user.js");
+var user = require("../model/user.js");
 var jwt = require("jsonwebtoken");
 var config = require("../config/config.js");
 

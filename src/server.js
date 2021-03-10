@@ -1,12 +1,12 @@
-var express = require("express");
-var passport = require("passport");
-var mongoose = require("mongoose");
-var config = require("./config/config");
+const express = require("express");
+const passport = require("passport");
+const mongoose = require("mongoose");
+const config = require("./config/config");
 var port = process.env.PORT || 3000;
 
+mongoose.connect(config.db);
 var app = express();
 
-app.use(express.json.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.get("/", function (req, res) {
@@ -14,6 +14,7 @@ app.get("/", function (req, res) {
 });
 
 var routes = require("./routes.js");
+const { db } = require("./config/config");
 app.use("/api", routes);
 
 app.listen(port);

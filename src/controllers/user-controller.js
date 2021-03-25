@@ -1,6 +1,12 @@
-var user = require("../model/user.js");
-var jwt = require("jsonwebtoken");
-var config = require("../config/config.js");
+var User = require("../models/user");
+const jwt = require("jsonwebtoken");
+const config = require("../config/config");
+
+function createToken(user) {
+  return jwt.sign({ id: user.id, email: user.email }, config.jwtSecret, {
+    expiresIn: 50, //token expires in 6hrs
+  });
+}
 
 exports.registerUser = (req, res) => {
   //check for required information
@@ -22,16 +28,10 @@ exports.registerUser = (req, res) => {
       if (err) {
         return res.status(400).json({ msg: err });
       }
-      return res.status(201).json(user);
+      return res.status(200).json(user);
     });
   });
 };
-
-function createToken(user) {
-  return jwt.sign({ id: user.id, email: user.email }, config.jwtSecret, {
-    expiresIn: 20,
-  });
-}
 
 exports.loginUser = (req, res) => {
   //check for required information
@@ -54,7 +54,7 @@ exports.loginUser = (req, res) => {
     user.comparePassword(req.body.password, (err, isMatch) => {
       if (isMatch && !err) {
         return res.status(200).json({
-          token: createToken(),
+          token: createToken(user),
         });
       } else {
         return res.status(400).json({

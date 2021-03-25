@@ -1,10 +1,19 @@
-var express = require("express"),
-  routes = express.Router();
-var userController = require("./controller/user-controller");
-var passport = require("passport");
+const express = require("express");
+const userController = require("./controllers/user-controller");
+const passport = require("passport");
 
-routes("/", (req, res) => {
-  return res.send("");
+const routes = express.Router();
+routes.get("/", (req, res) => {
+  return res.send("Auth api functioning");
 });
+routes.post("/login", userController.loginUser);
+routes.post("/register", userController.registerUser);
+routes.get(
+  "/auth-check",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    return res.json({ msg: `Logged in as ${req.user.username}.` });
+  }
+);
 
-module.exports(routes);
+module.exports = routes;

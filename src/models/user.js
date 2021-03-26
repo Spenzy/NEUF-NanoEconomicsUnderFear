@@ -1,41 +1,44 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
-PERSONAL_INFO = [
+//user's personal information model
+const PERSONAL_INFO = [
   {
     birthday: {
-      type: Date
+      type: Date,
     },
     Gender: {
-      type: String
+      type: String,
     },
     Country: {
-      type: String
+      type: String,
     },
     Education: {
-      type: String
+      type: String,
     },
     Occupation: {
-      type: String
-    }
-  }
+      type: String,
+    },
+  },
 ];
 
-DASS21_SCORES = [
-    {
-      depressionScore: {
-        type: Number
-      },
-      anxietyScore: {
-        type: Number
-      },
-      stressScore: {
-        type: Number
-      }
-    }
+//user's dass21 scores model
+const DASS21_SCORES = [
+  {
+    depressionScore: {
+      type: Number,
+    },
+    anxietyScore: {
+      type: Number,
+    },
+    stressScore: {
+      type: Number,
+    },
+  },
 ];
 
-var userSchema = new mongoose.Schema({
+//user Schema for db and app usage
+const userSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
@@ -54,7 +57,11 @@ var userSchema = new mongoose.Schema({
     required: true,
   },
   personalInfo: PERSONAL_INFO,
-  dasScores: DASS21_SCORES
+  sessions: {
+    dasScores: DASS21_SCORES,
+    activity: [],
+    timestamp: Date,
+  },
 });
 
 //password hashing using bcrypt
@@ -76,10 +83,11 @@ userSchema.pre("save", function (next) {
   });
 });
 
+//checking password for login
 userSchema.methods.comparePassword = function (candidatePassword, cb) {
   bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
-      if (err) return cb(err);
-      cb(null, isMatch);
+    if (err) return cb(err);
+    cb(null, isMatch);
   });
 };
 

@@ -2,12 +2,6 @@ var User = require("../models/user");
 const jwt = require("jsonwebtoken");
 const config = require("../config/config");
 
-function createToken(user) {
-  return jwt.sign({ id: user.id, email: user.email }, config.jwtSecret, {
-    expiresIn: 50, //token expires in 6hrs
-  });
-}
-
 exports.registerUser = (req, res) => {
   //check for required information
   if (!req.body.email || !req.body.password) {
@@ -16,18 +10,21 @@ exports.registerUser = (req, res) => {
       .json({ msg: "you are missing required information" });
   }
   //find if a user exists with said information
-  User.findOne({ email: req.body.email }, (err, user) => {
+  User.findOne({ email: req.body.email }, async (err, user) => {
     if (err) {
       return res.status(400).json({ msg: err });
     }
     if (user) {
       return res.status(400).json({ msg: "User Exists" });
     }
+    //password should not be shown even when crypted
+    {password:0}
     let newUser = User(req.body);
-    newUser.save((err, user) => {
+    await newUser.save((err, user) => {
       if (err) {
         return res.status(400).json({ msg: err });
-      }
+      } 
+      
       return res.status(200).json(user);
     });
   });
@@ -54,7 +51,10 @@ exports.loginUser = (req, res) => {
     user.comparePassword(req.body.password, (err, isMatch) => {
       if (isMatch && !err) {
         return res.status(200).json({
-          token: createToken(user),
+          //token creation
+          token: jwt.sign({ id: user.id }, config.jwtSecret, {
+          expiresIn: 50 //token expires in 6hrs
+          })
         });
       } else {
         return res.status(400).json({
@@ -64,3 +64,8 @@ exports.loginUser = (req, res) => {
     });
   });
 };
+
+exports.logoutUser = (req, res) => {
+  res.status(200).send({token: null });
+};
+

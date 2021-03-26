@@ -26,12 +26,19 @@ mongoose.connect(
   }
 );
 
-//setting up app routing
-const routes = require("./routes.js");
+//setting up auth routing
+const authRoutes = require("./routes/authRoute.js");
 app.get("/", function (req, res) {
-  return res.send("Api running");
+  return res.send("Auth API running");
 });
-app.use("/auth", routes);
+app.use("/auth", authRoutes);
+
+//setting dass21 routing
+const dassRoutes = require("./routes/dassRoute.js");
+app.get("/", function (req, res){
+  return res.send("DASS API running")
+});
+app.use("/dass", dassRoutes);
 
 //setting app port
 const port = process.env.PORT || 8080;

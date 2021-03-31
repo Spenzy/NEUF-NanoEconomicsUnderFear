@@ -66,6 +66,6 @@ exports.loginUser = (req, res) => {
 };
 
 exports.logoutUser = (req, res) => {
-  res.status(200).send({token: null });
+  res.token = null;
+  res.status(200).json({msg : "logged out"});
 };
-

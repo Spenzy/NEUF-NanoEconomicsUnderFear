@@ -40,6 +40,13 @@ app.get("/", function (req, res){
 });
 app.use("/dass", dassRoutes);
 
+//setting dass21 routing
+const storeRoutes = require("./routes/storeRoute.js");
+app.get("/", function (req, res){
+  return res.send("Store API running")
+});
+app.use("/store", storeRoutes);
+
 //setting app port
 const port = process.env.PORT || 8080;
 app.listen(port);

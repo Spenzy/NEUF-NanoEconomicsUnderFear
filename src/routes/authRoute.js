@@ -10,7 +10,7 @@ routes.post("/login", userController.loginUser);
 routes.get("/logout", userController.logoutUser);
 routes.post("/register", userController.registerUser);
 routes.get(
-  "/verify",
+  "/me",
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     return res.json({ msg: `Logged in as ${req.user.username}.` });

@@ -1,9 +1,13 @@
 const express = require("express");
 
-const DASS21_DEF = require("../models/dass21")
-
 const routes = express.Router();
-routes.get("/21/", async (req, res) => {
+routes.get("/", async (req, res) => {
+  return res.send("Auth api functioning");
+});
+
+const passport = require("passport");
+const DASS21_DEF = require("../models/dass21")
+routes.get("/21/", passport.authenticate("jwt", { session: false }), async (req, res) => {
     res.status(200).send(DASS21_DEF);
   });
 module.exports = routes;

@@ -8,7 +8,7 @@ routes.get("/", async (req, res) => {
 });
 
 routes.post("/", async (req, res) => {
-  const user = new User({
+  const product = new Product({
     name: req.body.name,
     password: req.body.password,
   });
@@ -23,8 +23,8 @@ routes.post("/", async (req, res) => {
 //find all products
 routes.get("/", async (req, res) => {
   try {
-    const allUsers = await User.find();
-    res.send(allUsers);
+    const allProducts = await Product.find();
+    res.send(allProducts);
   } catch (error) {
     res.status(400).send(error);
   }
@@ -33,13 +33,13 @@ routes.get("/", async (req, res) => {
 //find prodcut by id
 routes.get("/:id", async (req, res) => {
   try {
-    const foundUser = await User.findById(req.params.id);
-    if (foundUser)
-    res.send(foundUser);
+    const foundProdcut = await Product.findById(req.params.id);
+    if (foundProdcut)
+    res.send(foundProdcut);
     res.status(404).send();
   } catch (error) {
     res.status(400).send(error);
   }
-});  
+});
 
 module.exports = routes;

@@ -58,6 +58,7 @@ const userSchema = new mongoose.Schema({
   },
   personalInfo: PERSONAL_INFO,
   sessions: {
+    id: String,
     dasScores: DASS21_SCORES,
     activity: [],
     timestamp: Date,

@@ -13,7 +13,7 @@
         class="profile-img-card"
       />
       <form
-        *ngIf="isLoggedIn"
+        *ngIf="!isLoggedIn"
         name="form"
         (ngSubmit)="f.form.valid && onSubmit()"
         #f="ngForm"
@@ -70,16 +70,12 @@
           <div
             class="alert alert-danger"
             role="alert"
-            *ngIf="f.submitted && isLoginFailed"
+            *ngIf="f.submitted && !isLoggedIn"
           >
             Login failed: {{ errMsg }}
           </div>
         </div>
       </form>
-
-      <div class="alert alert-success" *ngIf="isLoggedIn">
-        Logged in as {{ roles }}.
-      </div>
     </div>
   </div>
 </ion-content>

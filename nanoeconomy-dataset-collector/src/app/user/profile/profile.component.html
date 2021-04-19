@@ -1,0 +1,17 @@
+<ion-content>
+  <div class="container" *ngIf="isLoggedIn; else isLoggedOut">
+    <header class="jumbotron">
+      <h3>
+        <strong>{{ currentUser.username }}</strong> Profile
+      </h3>
+    </header>
+    <p>
+      <strong>Email:</strong>
+      {{ currentUser.email }}
+    </p>
+  </div>
+
+  <ng-template #isLoggedOut>
+    Please login.
+  </ng-template>
+</ion-content>

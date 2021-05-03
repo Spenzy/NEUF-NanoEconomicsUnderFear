@@ -1,8 +1,12 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PageEvent} from '@angular/material/paginator';
 import {LanguageService} from '../../services/language.service';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {AuthService} from '../../services/auth.service';
+
+import {environment} from '../../../environments/environment';
+
+const hostAddress = environment.SERVER_ADDRESS;
 
 @Component({
   selector: 'app-dass21sheet',
@@ -13,25 +17,30 @@ export class Dass21sheetComponent implements OnInit {
 
   constructor(private http: HttpClient, private langService: LanguageService) { }
 
-  @Input() questionnaire: any [] = [];
+  questionnaire: any[] = [];
 
   currentLanguage = 'en';
 
   // MatPaginator Inputs
   length = 100;
   pageSize = 6;
-  pageSizeOptions: number[] = [5, 10, 25, 100];
+  pageSizeOptions: number[] = [6, 12, 18, 21];
 
   // MatPaginator Output
   pageEvent: PageEvent;
 
   // loads question sheet
-  getDas21Definition(): Observable<any[]>{
-    return this.http.get<any[]>('/dass/21/');
-  }
 
   ngOnInit(): void {
     this.currentLanguage = this.langService.getCurrentLanguage().toLowerCase();
+    this.http.get<any[]>(hostAddress + '/dass/21').subscribe(
+      response => {
+        this.questionnaire = response;
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   setPageSizeOptions(setPageSizeOptionsInput: string) {

@@ -5,100 +5,105 @@
 </ion-header>
 
 <ion-content>
-  <div class="row justify-content-center">
-    <div class="col-md-12 col-lg-10">
-      <div class="wrap d-md-flex">
-        <div class="text-wrap p-4 p-lg-5 text-center d-flex align-items-center order-md-last">
-          <div class="text w-100">
-            <h2>Welcome to login</h2>
-            <p>Don't have an account?</p>
-            <a href="#" class="btn btn-white btn-outline-white">Sign Up</a>
-          </div>
-        </div>
-        <div class="login-wrap p-4 p-lg-5">
-          <div class="d-flex">
-            <div class="w-100">
-              <h3 class="mb-4">Sign In</h3>
-            </div>
-          </div>
-          <form
-            *ngIf="!isLoggedIn"
-            name="form"
-            (ngSubmit)="f.form.valid && onSubmit()"
-            #f="ngForm"
-            novalidate
-          >
-            <div class="form-group mb-3">
-              <label class="label" for="username">Username</label>
-              <input
-                type="text"
-                class="form-control"
-                id="username"
-                name="username"
-                [(ngModel)]="form.username"
-                required
-                #username="ngModel"
-              />
-              <div
-                class="alert alert-danger"
-                role="alert"
-                *ngIf="username.errors && f.submitted"
-              >
-                Username is required!
+  <div class="row app-body h-75">
+    <main class="col main d-flex align-items-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 mx-auto">
+            <div class="card-group">
+              <div class="card p-4">
+                <div class="card-body">
+                  <h2 class="mb-4">Sign In</h2>
+                  <form
+                    *ngIf="!isLoggedIn"
+                    name="form"
+                    (ngSubmit)="f.form.valid && onSubmit()"
+                    #f="ngForm"
+                    novalidate
+                  >
+                    <div class="form-group mb-3">
+                      <label class="label" for="username">Username</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="username"
+                        name="username"
+                        [(ngModel)]="form.username"
+                        required
+                        #username="ngModel"
+                      />
+                      <div
+                        class="alert alert-danger"
+                        role="alert"
+                        *ngIf="username.errors && f.submitted"
+                      >
+                        Username is required!
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="password">Password</label>
+                      <input
+                        type="password"
+                        class="form-control"
+                        id="password"
+                        name="password"
+                        [(ngModel)]="form.password"
+                        required
+                        minlength="6"
+                        #password="ngModel"
+                      />
+                      <div
+                        class="alert alert-danger"
+                        role="alert"
+                        *ngIf="password.errors && f.submitted"
+                      >
+                        <div *ngIf="password.errors.required">Password is required</div>
+                        <div *ngIf="password.errors.minlength">
+                          Password must be at least 6 characters
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <button type="submit"
+                              class="form-control btn btn-success submit px-3">
+                        Sign In
+                      </button>
+                    </div>
+                    <div class="form-group d-md-flex">
+                      <div class="w-50 text-left">
+                        <label class="checkbox-wrap checkbox-primary mb-0">Remember Me
+                          <input type="checkbox" checked>
+                          <span class="checkmark"></span>
+                        </label>
+                      </div>
+                      <div class="w-50 text-md-right">
+                        <a href="#">Forgot Password</a>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div
+                        class="alert alert-danger"
+                        role="alert"
+                        *ngIf="f.submitted && !isLoggedIn"
+                      >
+                        Login failed: {{ errMsg }}
+                      </div>
+                    </div>
+                  </form>
+                </div>
               </div>
-            </div>
-            <div class="form-group">
-              <label for="password">Password</label>
-              <input
-                type="password"
-                class="form-control"
-                id="password"
-                name="password"
-                [(ngModel)]="form.password"
-                required
-                minlength="6"
-                #password="ngModel"
-              />
-              <div
-                class="alert alert-danger"
-                role="alert"
-                *ngIf="password.errors && f.submitted"
-              >
-                <div *ngIf="password.errors.required">Password is required</div>
-                <div *ngIf="password.errors.minlength">
-                  Password must be at least 6 characters
+              <div class="card p-4">
+                <div class="card-body">
+                  <h2>Welcome to Sign In</h2>
+                  <p>Don't have an account?</p>
+                  <a href="#" class="btn btn-primary nav-link" routerLink="/register">Sign Up</a>
                 </div>
               </div>
             </div>
-            <div class="form-group">
-              <button type="submit"
-                      class="form-control btn btn-primary submit px-3">
-                Sign In
-              </button>
-            </div>
-            <div class="form-group d-md-flex">
-              <div class="w-50 text-left">
-                <label class="checkbox-wrap checkbox-primary mb-0">Remember Me
-                  <input type="checkbox" checked>
-                  <span class="checkmark"></span>
-                </label>
-              </div>
-              <div class="w-50 text-md-right">
-                <a href="#">Forgot Password</a>
-              </div>
-            </div>
-            <div class="form-group">
-              <div
-                class="alert alert-danger"
-                role="alert"
-                *ngIf="f.submitted && !isLoggedIn"
-              >
-                Login failed: {{ errMsg }}
-              </div>
-            </div>
-          </form>
+          </div>
         </div>
       </div>
-    </div>
+    </main>
   </div>
+
 </ion-content>

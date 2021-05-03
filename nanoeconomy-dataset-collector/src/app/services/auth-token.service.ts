@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
-const currentUser = 'auth-user';
-
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthTokenService {
-  isLoggedIn = false;
-  authToken: string;
+  protected isLoggedIn = false;
+  protected authToken: string;
 
   constructor(private http: HttpClient) {
     this.isLoggedIn = false;
@@ -19,6 +18,7 @@ export class AuthTokenService {
     const token = window.localStorage.getItem('token');
     this.isLoggedIn = true;
     this.authToken = token;
+    console.log(this.authToken + this.isLoggedIn);
   }
 
   destroySession() {
@@ -29,16 +29,16 @@ export class AuthTokenService {
 
   saveSession(authToken){
     this.destroySession();
-    this.authToken = authToken;
+    window.localStorage.setItem('token', authToken);
   }
 
   public saveUser(user: any): void {
-    window.localStorage.removeItem(currentUser);
-    window.localStorage.setItem(currentUser, JSON.stringify(user));
+    window.localStorage.removeItem('loggedUser');
+    window.localStorage.setItem('loggedUser', JSON.stringify(user));
   }
 
   public getUser(): any {
-    const user = window.localStorage.getItem(currentUser);
+    const user = window.localStorage.getItem('loggedUser');
     if (user) {
       return JSON.parse(user);
     }
@@ -48,7 +48,6 @@ export class AuthTokenService {
   getStatus(){
     return this.isLoggedIn;
   }
-
 
   getToken(){
     return this.authToken;

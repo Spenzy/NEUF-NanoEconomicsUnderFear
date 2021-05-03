@@ -63,6 +63,9 @@ const userSchema = new mongoose.Schema({
     activity: [],
     timestamp: Date,
   },
+  isAdmin:{
+    type: Boolean
+  }
 });
 
 //password hashing using bcrypt

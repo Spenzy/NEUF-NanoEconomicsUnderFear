@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router,  } from '@angular/router';
+
+// service imports
 import {AuthService} from '../../services/auth.service';
 import {AuthTokenService} from '../../services/auth-token.service';
 
@@ -18,14 +20,12 @@ export class LoginPage implements OnInit {
   errMsg = '';
   roles: string[] = [];
 
-  constructor(private authService: AuthService, private route: Router,  private authToken: AuthTokenService) { }
+  constructor(private router: Router, private authService: AuthService, private authToken: AuthTokenService) { }
 
   ngOnInit(): void {
-      this.isLoggedIn = this.authToken.getStatus();
-  }
-
-  switchSignUp(): void{
-    this.route.navigate(['/register']);
+      if (this.authToken.getStatus()){
+        this.router.navigate(['home']).then(err => console.log(err));
+      }
   }
 
   onSubmit(): void {
@@ -35,11 +35,11 @@ export class LoginPage implements OnInit {
       data => {
         this.authToken.saveSession(data.accessToken);
         this.authToken.saveUser(data);
-        this.isLoggedIn = true;
+        this.authToken.loadSession();
       },
       err => {
-        this.errMsg = err.error.message;
-        this.isLoggedIn = false;
+        this.errMsg = err.status + ' : ' + err.message;
+        console.log(err);
       }
     );
   }

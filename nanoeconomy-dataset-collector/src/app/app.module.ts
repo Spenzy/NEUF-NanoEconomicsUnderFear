@@ -9,25 +9,27 @@ import {AuthInterceptor} from './interceptor/auth.interceptor';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { MenubarModule } from 'primeng/menubar';
-import { InputTextModule } from 'primeng/inputtext';
-import { ButtonModule } from 'primeng/button';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LanguagePipe } from './pipes/language.pipe';
+
+// material components
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, LanguagePipe],
   entryComponents: [],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-    MenubarModule,
-    InputTextModule,
-    ButtonModule
+    BrowserAnimationsModule,
+    MatPaginatorModule,
     ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-              { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor}],
+              { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

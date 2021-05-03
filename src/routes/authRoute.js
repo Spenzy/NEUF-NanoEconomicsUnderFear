@@ -16,5 +16,7 @@ routes.get(
     return res.json({ msg: `Logged in as ${req.user.username}.` });
   }
 );
+/*routes.post("/forgot-password", userController.forgotpassword);
+routes.post("/reset-password", userController.resetpassword);*/
 
 module.exports = routes;

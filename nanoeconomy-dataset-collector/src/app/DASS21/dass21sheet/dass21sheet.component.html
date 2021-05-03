@@ -1,0 +1,23 @@
+<ion-content>
+  <mat-paginator [length]="length"
+                 [pageSize]="pageSize"
+                 [pageSizeOptions]="pageSizeOptions"
+                 (page)="pageEvent = $event">
+  </mat-paginator>
+
+  <div class="row" >
+    <div *ngFor="let question of questionnaire" class="col-md-6">
+      <mat-form-field [ngStyle]="{'text-align': currentLanguage == 'ar' ? 'right' : '' }" style="width: 100%;">
+        <mat-label>
+          {{question.labels | language}}
+        </mat-label>
+        <mat-select [(ngModel)]="question.answerValue">
+          <mat-option [value]="opt" *ngFor="let opt of question.possibleValues">
+            {{opt.labels | language}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+  </div>
+</ion-content>

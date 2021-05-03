@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {AuthService} from '../../services/auth.service';
 import {AuthTokenService} from '../../services/auth-token.service';
 
@@ -17,10 +18,14 @@ export class LoginPage implements OnInit {
   errMsg = '';
   roles: string[] = [];
 
-  constructor(private authService: AuthService, private authToken: AuthTokenService) { }
+  constructor(private authService: AuthService, private route: Router,  private authToken: AuthTokenService) { }
 
   ngOnInit(): void {
       this.isLoggedIn = this.authToken.getStatus();
+  }
+
+  switchSignUp(): void{
+    this.route.navigate(['/register']);
   }
 
   onSubmit(): void {

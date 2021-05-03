@@ -18,19 +18,18 @@ export class AuthService {
   }
 
   login(username: string, password: string): Observable<any> {
-    return this.http.post(hostAdress + api + 'signin', {
+    return this.http.post(hostAdress + api + 'login', {
       username,
       password
     }, httpOptions);
   }
 
   register(username: string, email: string, password: string): Observable<any> {
-    return this.http.post(hostAdress + api + 'signup', {
+    return this.http.post(hostAdress + api + 'register', {
       username,
       email,
       password
     }, httpOptions);
   }
-
 
 }

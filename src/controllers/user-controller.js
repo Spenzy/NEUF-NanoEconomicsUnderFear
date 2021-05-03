@@ -2,14 +2,16 @@ var User = require("../models/user");
 const jwt = require("jsonwebtoken");
 const config = require("../config/config");
 
+//this function permits user registration
 exports.registerUser = (req, res) => {
   //check for required information
-  if (!req.body.email || !req.body.password) {
+  if (!req.body.username || !req.body.email || !req.body.password) {
     return res
       .status(400)
       .json({ msg: "you are missing required information" });
   }
   //find if a user exists with said information
+  //let loginMethod = !!username ? {username: username} : {email: email};
   User.findOne({ email: req.body.email }, async (err, user) => {
     if (err) {
       return res.status(400).json({ msg: err });
@@ -30,15 +32,16 @@ exports.registerUser = (req, res) => {
   });
 };
 
+//this function permits user login
 exports.loginUser = (req, res) => {
   //check for required information
-  if (!req.body.email || !req.body.password) {
+  if (!req.body.username || !req.body.password) {
     return res
       .status(400)
       .json({ msg: "you are missing required information" });
   }
   //find if a user exists with said information
-  User.findOne({ email: req.body.email }, (err, user) => {
+  User.findOne({ username: req.body.username }, (err, user) => {
     if (err) {
       return res.status(400).json({ msg: err });
     }
@@ -65,6 +68,7 @@ exports.loginUser = (req, res) => {
   });
 };
 
+//this function logs out user
 exports.logoutUser = (req, res) => {
   res.token = null;
   res.status(200).json({msg : "logged out"});

@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { NavbarComponent } from './navbar.component';
+import { Dass21sheetComponent } from './dass21sheet.component';
 
-describe('NavbarComponent', () => {
-  let component: NavbarComponent;
-  let fixture: ComponentFixture<NavbarComponent>;
+describe('Dass21sheetComponent', () => {
+  let component: Dass21sheetComponent;
+  let fixture: ComponentFixture<Dass21sheetComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ NavbarComponent ],
+      declarations: [ Dass21sheetComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(NavbarComponent);
+    fixture = TestBed.createComponent(Dass21sheetComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

@@ -18,6 +18,7 @@ export class Dass21sheetComponent implements OnInit {
   constructor(private http: HttpClient, private langService: LanguageService) { }
 
   questionnaire: any[] = [];
+  answers: any[] = [];
 
   currentLanguage = 'en';
 
@@ -30,6 +31,9 @@ export class Dass21sheetComponent implements OnInit {
   pageEvent: PageEvent;
 
   // loads question sheet
+  form: {
+    answers: any;
+  };
 
   ngOnInit(): void {
     this.currentLanguage = this.langService.getCurrentLanguage().toLowerCase();
@@ -41,6 +45,11 @@ export class Dass21sheetComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  updateAnswer(value) {
+    console.log(value);
+    this.answers = value;
   }
 
   setPageSizeOptions(setPageSizeOptionsInput: string) {

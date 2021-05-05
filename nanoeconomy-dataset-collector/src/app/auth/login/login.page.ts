@@ -4,6 +4,16 @@ import { Router,  } from '@angular/router';
 // service imports
 import {AuthService} from '../../services/auth.service';
 import {AuthTokenService} from '../../services/auth-token.service';
+import {ErrorStateMatcher} from '@angular/material/core';
+import {FormControl, FormGroupDirective, NgForm} from '@angular/forms';
+
+/** Error when invalid control is dirty, touched, or submitted. */
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
   selector: 'app-login',
@@ -19,12 +29,14 @@ export class LoginPage implements OnInit {
   isLoggedIn = false;
   errMsg = '';
   roles: string[] = [];
+  user: any;
 
   constructor(private router: Router, private authService: AuthService, private authToken: AuthTokenService) { }
 
   ngOnInit(): void {
-      if (this.authToken.getStatus()){
-        this.router.navigate(['home']).then(err => console.log(err));
+      this.isLoggedIn = this.authToken.getStatus();
+      if (this.isLoggedIn){
+        this.router.navigate(['dass21']).then(err => console.log(err));
       }
   }
 
@@ -33,12 +45,12 @@ export class LoginPage implements OnInit {
 
     this.authService.login(username, password).subscribe(
       data => {
-        this.authToken.saveSession(data.accessToken);
-        this.authToken.saveUser(data);
+        this.authToken.saveSession(data.token);
         this.authToken.loadSession();
+        this.router.navigate(['dass21']).then(err => console.log(err));
       },
       err => {
-        this.errMsg = err.status + ' : ' + err.message;
+        this.errMsg = err.status + ' : ' + err.error.msg;
         console.log(err);
       }
     );

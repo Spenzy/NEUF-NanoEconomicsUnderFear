@@ -55,7 +55,7 @@ exports.loginUser = (req, res) => {
       if (isMatch && !err) {
         return res.status(200).json({
           //token creation
-          token: jwt.sign({ id: user.id }, config.jwtSecret, {
+          token: jwt.sign({ id: user.id, username: user.username, isAdmin: user.isAdmin }, config.jwtSecret, {
           expiresIn: 50 //token expires in 6hrs
           })
         });
@@ -66,6 +66,19 @@ exports.loginUser = (req, res) => {
       }
     });
   });
+};
+
+exports.getUser = (req, res) => {
+  User.findOne({ _id: req.body.id }, (err, user) => {
+    if (err) {
+      return res.status(400).json({ msg: err });
+    }
+    if (!user) {
+      return res
+        .status(400)
+        .json({ msg: "No user with said information exists" });
+    }
+  })
 };
 
 //this function logs out user

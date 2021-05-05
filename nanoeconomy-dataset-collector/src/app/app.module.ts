@@ -15,11 +15,13 @@ import { LanguagePipe } from './pipes/language.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSelectModule} from '@angular/material/select';
 import {MatStepperModule} from '@angular/material/stepper';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+import { HasRoleDirective } from './directives/has-role.directive';
 
 
 @NgModule({
-  declarations: [AppComponent, Dass21sheetComponent, LanguagePipe],
+  declarations: [AppComponent, Dass21sheetComponent, LanguagePipe, HasRoleDirective],
   entryComponents: [],
   imports: [
     BrowserModule,
@@ -28,8 +30,10 @@ import {FormsModule} from '@angular/forms';
     HttpClientModule,
     BrowserAnimationsModule,
     MatStepperModule,
+    MatInputModule,
     MatSelectModule,
     FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
               { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],

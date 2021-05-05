@@ -11,8 +11,7 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
-    canActivate: [AuthService]
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
     path: 'login',
@@ -24,7 +23,8 @@ const routes: Routes = [
   },
   {
     path: 'dass21',
-    component: Dass21sheetComponent
+    component: Dass21sheetComponent,
+    canActivate: [AuthService]
   }
 ];
 

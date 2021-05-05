@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import jwtDecode from 'jwt-decode';
+import {BehaviorSubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +18,10 @@ export class AuthTokenService {
 
   loadSession() {
     const token = window.localStorage.getItem('token');
-    this.isLoggedIn = true;
-    this.authToken = token;
-    console.log(this.authToken + this.isLoggedIn);
+    if (token){
+      this.authToken = token;
+      this.isLoggedIn = true;
+    }
   }
 
   destroySession() {
@@ -28,19 +31,12 @@ export class AuthTokenService {
   }
 
   saveSession(authToken){
-    this.destroySession();
     window.localStorage.setItem('token', authToken);
   }
 
-  public saveUser(user: any): void {
-    window.localStorage.removeItem('loggedUser');
-    window.localStorage.setItem('loggedUser', JSON.stringify(user));
-  }
-
-  public getUser(): any {
-    const user = window.localStorage.getItem('loggedUser');
-    if (user) {
-      return JSON.parse(user);
+  getPayload(): any {
+    if (this.authToken) {
+      return jwtDecode(this.authToken);
     }
     return {};
   }

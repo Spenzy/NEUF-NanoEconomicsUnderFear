@@ -3,37 +3,39 @@
     <ion-title>
       DASS21 Questionnaire
     </ion-title>
+    <ion-button *appHasRole>AdminPage</ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="d-flex justify-content-center">
-    <mat-vertical-stepper>
-    <div *ngFor="let question of questionnaire" >
-      <mat-step>
-
-        <ng-template matStepLabel>
-          <div class="row">
-            <div class="col-6" style="margin-top: 10px;">
+    <div class="d-flex justify-content-center">
+      <mat-vertical-stepper linear #stepper>
+      <div *ngFor="let question of questionnaire" >
+        <mat-step>
+          <ng-template matStepLabel>
+            <div class="row">
+              <div class="col-6" style="margin-top: 10px;">
+                {{question.labels | language}}
+              </div>
+              <div class="col-6">
+                <div class="alert alert-success" style="float: right;" *ngIf="question.answerValue">{{question.answerValue.labels | language}} </div>
+              </div>
+            </div>
+          </ng-template>
+          <mat-form-field [ngStyle]="{'text-align': currentLanguage == 'ar' ? 'right' : '' }" style="width: 50%;">
+            <mat-label>
               {{question.labels | language}}
-            </div>
-            <div class="col-6">
-              <div class="alert alert-success" style="float: right;" *ngIf="question.answerValue">{{question.answerValue.labels | language}} </div>
-            </div>
-          </div>
-        </ng-template>
-        <mat-form-field [ngStyle]="{'text-align': currentLanguage == 'ar' ? 'right' : '' }" style="width: 50%;">
-          <mat-label>
-            {{question.labels | language}}
-          </mat-label>
-          <mat-select [(ngModel)]="question.answerValue">
-            <mat-option [value]="opt" *ngFor="let opt of question.possibleValues">
-              {{opt.labels | language}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </mat-step>
+            </mat-label>
+            <mat-select [(ngModel)]="question.answerValue" (selectionChange)="updateAnswer($event.value)">
+              <mat-option [value]="opt" *ngFor="let opt of question.possibleValues">
+                {{opt.labels | language}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-step>
+      </div>
+    </mat-vertical-stepper>
     </div>
-  </mat-vertical-stepper>
-  </div>
 </ion-content>
+
+{{answers | json}}

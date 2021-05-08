@@ -1,0 +1,65 @@
+<ion-header>
+  <app-navbar></app-navbar>
+    <button mat-button color="warn" [matMenuTriggerFor]="menu">{{currentLanguage}}</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="changeLang('en')">English</button>
+      <button mat-menu-item (click)="changeLang('fr')">français</button>
+      <button mat-menu-item (click)="changeLang('ar')">العربية</button>
+    </mat-menu>
+</ion-header>
+
+<ion-content>
+  <div class="container mat-elevation-z15">
+    <div class="row app-body h-75">
+      <div class="col d-flex align-items-center">
+        <form
+          name="form"
+          (ngSubmit)="f.form.valid && onSubmit()"
+          #f="ngForm"
+          novalidate>
+          <div class="d-flex align-content-center" *ngIf="loading">
+            <mat-progress-spinner
+              color="primary"
+              mode="indeterminate">
+            </mat-progress-spinner>
+          </div>
+            <mat-vertical-stepper linear>
+            <div *ngFor="let question of questionnaire;let questIndex=index" >
+              <mat-step errorMessage="Name is required.">
+                <ng-template matStepLabel>
+                  <div class="row">
+                    <div class="col-6" style="margin-top: 10px;">
+                      {{question.labels | language}}
+                    </div>
+                    <div class="col-6">
+                      <div class="alert alert-success"
+                           style="float: right;"
+                           *ngIf="question.answerValue">{{question.answerValue.labels | language}} </div>
+                    </div>
+                  </div>
+                </ng-template>
+                <mat-form-field [ngStyle]="{'text-align': currentLanguage == 'ar' ? 'right' : '' }" style="width: 50%;">
+                  <mat-label>
+                    {{question.labels | language}}
+                  </mat-label>
+                  <mat-select required>
+                    <mat-option
+                      [value]="opt"
+                      (click)="updateAnswer(opt, questIndex)"
+                      *ngFor="let opt of question.possibleValues"> {{opt.labels | language}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </mat-step>
+            </div>
+          </mat-vertical-stepper>
+          <button mat-raised-button
+                  *ngIf="!loading"
+                  class="col"
+                  color="primary"
+                  type="submit"> Next </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</ion-content>

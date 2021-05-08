@@ -1,18 +1,27 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LanguageService {
 
-  constructor() { }
+  currentLanguage: any;
 
-  getCurrentLanguage(): string{
+  constructor() {
+  }
+
+  getCurrentLanguage(): string {
     const currentLanguage = localStorage.getItem('language');
-    if (currentLanguage){
+    if (currentLanguage) {
       return currentLanguage;
-    }else{
+    } else {
       return 'en';
     }
+  }
+
+  changeLanguage(lang) {
+    localStorage.setItem('language', lang);
+    this.currentLanguage = lang;
+    location.reload();
   }
 }

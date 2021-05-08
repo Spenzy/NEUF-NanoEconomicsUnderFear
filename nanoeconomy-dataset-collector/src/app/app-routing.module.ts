@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import {AuthService} from './services/auth.service';
-import {Dass21sheetComponent} from './DASS21/dass21sheet/dass21sheet.component';
+import {Dass21sheetComponent} from './dass21sheet/dass21sheet.component';
 
 const routes: Routes = [
   {
@@ -24,7 +24,7 @@ const routes: Routes = [
   {
     path: 'dass21',
     component: Dass21sheetComponent,
-    canActivate: [AuthService]
+    // canActivate: [AuthService]
   }
 ];
 

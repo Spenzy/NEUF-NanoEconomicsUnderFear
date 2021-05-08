@@ -25,6 +25,7 @@ const PERSONAL_INFO = [
 //user's dass21 scores model
 const DASS21_SCORES = [
   {
+    answers: [],
     depressionScore: {
       type: Number,
     },
@@ -58,10 +59,11 @@ const userSchema = new mongoose.Schema({
   },
   personalInfo: PERSONAL_INFO,
   sessions: {
-    id: String,
+    _sessionId: mongoose.Schema.Types.ObjectId,
     dasScores: DASS21_SCORES,
-    activity: [],
-    timestamp: Date,
+    activity: [
+      { type: Date, default: Date.now },
+    ]
   },
   isAdmin:false
 });

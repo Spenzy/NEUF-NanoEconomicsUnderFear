@@ -7,14 +7,6 @@ import {AuthTokenService} from '../../services/auth-token.service';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {FormControl, FormGroupDirective, NgForm} from '@angular/forms';
 
-/** Error when invalid control is dirty, touched, or submitted. */
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-  }
-}
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -29,7 +21,7 @@ export class LoginPage implements OnInit {
   isLoggedIn = false;
   errMsg = '';
   roles: string[] = [];
-  user: any;
+  hide = true;
 
   constructor(private router: Router, private authService: AuthService, private authToken: AuthTokenService) { }
 

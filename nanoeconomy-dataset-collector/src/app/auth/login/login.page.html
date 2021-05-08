@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header xmlns="http://www.w3.org/1999/html">
   <ion-toolbar>
     <ion-title>Login</ion-title>
   </ion-toolbar>
@@ -10,7 +10,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-8 mx-auto">
-            <div class="card-group">
+            <div class="card-group mat-elevation-z15">
               <div class="card p-4">
                 <div class="card-body">
                   <h2 class="mb-4">Sign In</h2>
@@ -39,13 +39,16 @@
                       <mat-label >Password</mat-label>
                       <input
                         matInput
-                        type="password"
+                        [type]="hide ? 'password' : 'text'"
                         id="password"
                         name="password"
                         [(ngModel)]="form.password"
                         required
                         minlength="6"
-                        #password="ngModel"/>
+                        #password="ngModel">
+                        <a mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </a>
                       <mat-error *ngIf="password.errors && f.submitted">
                         <mat-error *ngIf="password.errors.required">
                           Password is required

@@ -1,7 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import jwtDecode from 'jwt-decode';
-import {BehaviorSubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

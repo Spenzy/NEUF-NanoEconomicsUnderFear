@@ -1,9 +1,8 @@
-import { HTTP_INTERCEPTORS, HttpEvent } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 
-import { AuthTokenService} from '../services/auth-token.service';
-import { Observable } from 'rxjs';
+import {AuthTokenService} from '../services/auth-token.service';
+import {Observable} from 'rxjs';
 
 const TOKEN_HEADER = 'Authorization';       // for Spring Boot back-end
 

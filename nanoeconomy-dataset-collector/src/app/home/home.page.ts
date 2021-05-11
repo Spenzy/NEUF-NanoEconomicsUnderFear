@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {AuthTokenService} from '../services/auth-token.service';
 
 @Component({

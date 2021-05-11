@@ -1,7 +1,7 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {IonicModule} from '@ionic/angular';
 
-import { NavitemsComponent } from './navitems.component';
+import {NavitemsComponent} from './navitems.component';
 
 describe('NavitemsComponent', () => {
   let component: NavitemsComponent;

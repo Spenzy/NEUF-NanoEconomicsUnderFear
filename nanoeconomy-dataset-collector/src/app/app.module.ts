@@ -1,23 +1,23 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { RouteReuseStrategy } from '@angular/router';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {RouteReuseStrategy} from '@angular/router';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import {IonicModule, IonicRouteStrategy} from '@ionic/angular';
 
 import {AuthInterceptor} from './interceptor/auth.interceptor';
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
+import {AppComponent} from './app.component';
+import {AppRoutingModule} from './app-routing.module';
 import {Dass21sheetComponent} from './dass21sheet/dass21sheet.component';
-import { LanguagePipe } from './pipes/language.pipe';
+import {LanguagePipe} from './pipes/language.pipe';
 
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatSelectModule} from '@angular/material/select';
 import {MatStepperModule} from '@angular/material/stepper';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
-import { HasAdminDirective } from './directives/has-admin.directive';
+import {HasAdminDirective} from './directives/has-admin.directive';
 import {MatButtonModule} from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
@@ -25,37 +25,39 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import {NavbarComponent} from './navbar/navbar.component';
-import {NavitemsComponent} from './navbar/navitems/navitems.component';
 import {MatIconModule} from '@angular/material/icon';
-import {FlexModule} from '@angular/flex-layout/typings/flex';
-import {ExtendedModule} from '@angular/flex-layout/typings/esm5/extended';
-import {FlexLayoutModule} from '@angular/flex-layout';
+import {MatDialogModule} from '@angular/material/dialog';
+import {ResultmodalComponent} from './dass21sheet/resultmodal/resultmodal.component';
 
 
 @NgModule({
-  declarations: [AppComponent, Dass21sheetComponent, LanguagePipe, HasAdminDirective, NavbarComponent, NavitemsComponent],
-  entryComponents: [],
-  imports: [
-    BrowserModule,
-    IonicModule.forRoot(),
-    AppRoutingModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatStepperModule,
-    MatInputModule,
-    MatSelectModule,
-    MatMenuModule,
-    MatListModule,
-    MatSidenavModule,
-    MatToolbarModule,
-    MatProgressSpinnerModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatIconModule
-  ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-              { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
-  bootstrap: [AppComponent],
+    declarations: [AppComponent, Dass21sheetComponent, LanguagePipe, HasAdminDirective, NavbarComponent, ResultmodalComponent],
+    entryComponents: [],
+    imports: [
+        BrowserModule,
+        IonicModule.forRoot(),
+        AppRoutingModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatStepperModule,
+        MatInputModule,
+        MatSelectModule,
+        MatMenuModule,
+        MatListModule,
+        MatSidenavModule,
+        MatToolbarModule,
+        MatProgressSpinnerModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        MatIconModule,
+        MatDialogModule
+    ],
+    providers: [{provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
+        {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
+    bootstrap: [AppComponent],
+    exports: [
+        NavbarComponent
+    ]
 })
 export class AppModule {}

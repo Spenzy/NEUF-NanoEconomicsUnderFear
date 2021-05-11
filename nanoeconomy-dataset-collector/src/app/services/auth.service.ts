@@ -3,7 +3,7 @@ import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 import {environment} from '../../environments/environment';
-import {Router, CanActivate, ActivatedRouteSnapshot} from '@angular/router';
+import {ActivatedRouteSnapshot, Router} from '@angular/router';
 import {AuthTokenService} from './auth-token.service';
 
 

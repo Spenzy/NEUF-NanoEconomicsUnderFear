@@ -5,6 +5,9 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 import {AuthService} from '../services/auth.service';
+import {MatDialog} from '@angular/material/dialog';
+import {ResultmodalComponent} from './resultmodal/resultmodal.component';
+import {TrackerService} from '../services/tracker.service';
 
 const hostAddress = environment.SERVER_ADDRESS;
 
@@ -18,7 +21,11 @@ const hostAddress = environment.SERVER_ADDRESS;
 })
 export class Dass21sheetComponent implements OnInit {
 
-  constructor(private http: HttpClient, private authService: AuthService, private langService: LanguageService) {
+  constructor(private http: HttpClient,
+              private authService: AuthService,
+              private langService: LanguageService,
+              private trackerService: TrackerService,
+              public dialog: MatDialog) {
   }
 
   questionnaire: any[] = [];
@@ -33,11 +40,11 @@ export class Dass21sheetComponent implements OnInit {
   loading: boolean; // matSpinner loading
 
   // loads question sheet
-  form: {
-    answers: any;
-    depressionScore: any;
-    anxietyScore: any;
-    stressScore: any;
+  scores = {
+    answers: null,
+    depressionScore: null,
+    anxietyScore: null,
+    stressScore: null
   };
 
   // this function affects answer to answers table
@@ -49,17 +56,24 @@ export class Dass21sheetComponent implements OnInit {
   // here we calculate scores that will be persisted in db
   calculateScore(factorTable): any {
     let sum = 0;
-    for (const index of factorTable) {
+    let index;
+    for (index of factorTable) {
       sum += this.answers[index - 1]; // provided factorTables start from 1
     }
     return sum;
   }
 
   onSubmit() {
-    this.form.depressionScore = this.calculateScore(this.depressionIndexes);
-    this.form.anxietyScore = this.calculateScore(this.anxietyIndexes);
-    this.form.stressScore = this.calculateScore(this.stressIndexes);
-    console.log(this.form);
+    this.scores.answers = this.answers;
+    this.scores.depressionScore = this.calculateScore(this.depressionIndexes);
+    this.scores.anxietyScore = this.calculateScore(this.anxietyIndexes);
+    this.scores.stressScore = this.calculateScore(this.stressIndexes);
+    this.trackerService.startSession();
+    console.log(this.scores);
+
+    const dialogRef = this.dialog.open(ResultmodalComponent, {
+      data: {scores: this.scores, user: this.authService.currentUser}
+    });
   }
 
   changeLang(lang) {
@@ -68,6 +82,7 @@ export class Dass21sheetComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
+    this.answers = [1, 1, 2, 2, 2, 2, 2, 1, 2, 2, 3, 2, 2, 1, 2, 1, 2, 1, 0, 3, 2];
     this.currentLanguage = this.langService.getCurrentLanguage().toLowerCase();
     this.http.get<any[]>(hostAddress + '/dass/21').subscribe(
       response => {

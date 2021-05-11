@@ -1,11 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Router,  } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router,} from '@angular/router';
 
 // service imports
 import {AuthService} from '../../services/auth.service';
 import {AuthTokenService} from '../../services/auth-token.service';
-import {ErrorStateMatcher} from '@angular/material/core';
-import {FormControl, FormGroupDirective, NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-login',

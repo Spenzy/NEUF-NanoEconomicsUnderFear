@@ -1,7 +1,7 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {IonicModule} from '@ionic/angular';
 
-import { Dass21sheetComponent } from './dass21sheet.component';
+import {Dass21sheetComponent} from './dass21sheet.component';
 
 describe('Dass21sheetComponent', () => {
   let component: Dass21sheetComponent;

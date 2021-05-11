@@ -54,7 +54,7 @@
             </div>
           </mat-vertical-stepper>
           <button mat-raised-button
-                  *ngIf="!loading"
+                  *ngIf="!loading && answers.length === 21"
                   class="col"
                   color="primary"
                   type="submit"> Next </button>

@@ -1,4 +1,4 @@
-import { HasAdminDirective } from './has-admin.directive';
+import {HasAdminDirective} from './has-admin.directive';
 
 describe('HasAdminDirective', () => {
   it('should create an instance', () => {

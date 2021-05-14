@@ -1,0 +1,28 @@
+@startuml
+
+participant Client
+participant authRoute as auth
+control userController as userC
+database innoDB
+
+Client -> auth: POST(username, email, password)
+auth -> userC: "/register", registerUser
+userC -> userC: validate Info
+alt Success: Required info provided
+  userC -> innoDB: findOne(email)
+  alt Success: no User exists
+    userC <-- innoDB: no user exists
+    userC -> innoDB: save(username)
+    userC <<-- innoDB: user
+        auth <<-- userC:{"msg":"success"}
+        Client <<-- auth: http Response(200)\n {"msg":"success"}
+  else Failure: User Exists
+    userC <<-- innoDB:user
+    auth <<-- userC:{"msg":"User Exists"}
+    Client <<-- auth: http Response(400)\n {"msg":"User Exists"}
+    end
+else Failure: missing information
+  auth <<-- userC:{"msg":"missing required\n information"}(400)
+  Client <<-- auth: http Response(400)\n {"msg":"missing required information"}
+end
+@enduml

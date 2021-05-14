@@ -28,7 +28,7 @@ export class ResultmodalComponent implements OnInit {
   }
 
   finishSession(){
-    this.trackerService.endSession();
+    console.log(this.trackerService.endSession());
     this.session = this.trackerService.session.value;
   }
 

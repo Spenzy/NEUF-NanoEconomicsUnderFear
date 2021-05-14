@@ -1,0 +1,31 @@
+@startuml
+
+actor User
+boundary loginPage as login
+participant authTokenService as authToken <<service>>
+participant authService as auth <<service>>
+participant AuthAPI
+
+User -> login: Log into account
+activate login
+login -> auth: login(username, password)
+activate auth
+auth -> AuthAPI:"/auth/login"\n POST(username, password)
+alt Success: Logged in
+  auth <- AuthAPI:http Response(200):\n{token, expiresIn}
+  login <- auth: http Response(200):\n{token, expiresIn}
+  login -> authToken**: saveSession(data)\n loadSession()
+  activate authToken
+  authToken -> login: {token, isLoggedIn}
+  deactivate authToken
+  login -> User: redirect(dass21Component)
+else Failure: failed to login
+  auth <- AuthAPI:http Response(400):{msg}
+  login <- auth: http Response(400):{msg}
+  deactivate auth
+  login -> login: errMsg = 400 +':'+ msg
+  User <- login: errMsg
+  deactivate login
+end
+
+@enduml

@@ -1,15 +1,27 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AuthService} from './auth.service';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {formatDate} from '@angular/common';
 import {Router} from '@angular/router';
+import {environment} from '../../environments/environment';
+import {stringify} from 'querystring';
 
+const hostAddress = environment.SERVER_ADDRESS;
+
+const httpOptions = {
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class TrackerService {
+
+  userID: any;
+  dassScores: any;
+  sessionDetails: any;
+
 
   session: BehaviorSubject<any> = new BehaviorSubject(null);
   currentLocation: string;
@@ -24,7 +36,8 @@ export class TrackerService {
     });
   }
 
-  startSession() {
+  startSession(dassScores) {
+    this.dassScores = dassScores;
     this.session.next({
       startDate: formatDate(new Date(), 'fullDate', 'en'),
       startTime: formatDate(new Date(), 'mediumTime', 'en'),
@@ -34,7 +47,7 @@ export class TrackerService {
   }
 
   timeStamp(message, reached?, productNbr?) {
-    if (reached){
+    if (reached) {
       this.session.subscribe(
         data => data.activity.push({
           location: this.currentLocation,
@@ -44,8 +57,7 @@ export class TrackerService {
         }),
         error => console.log(error)
       );
-    }
-    else if (productNbr){
+    } else if (productNbr) {
       this.session.subscribe(
         data => data.activity.push({
           location: this.currentLocation,
@@ -63,6 +75,13 @@ export class TrackerService {
     this.session.subscribe(
       data => data.endTime = formatDate(new Date(), 'short', 'en')
     );
+    this.sessionDetails = this.session.value;
+    this.userID = this.authService.currentUser.value.userID;
+    return this.http.post(hostAddress + '/session' + '/save', {
+      userID: this.userID,
+      dassScore: this.dassScores,
+      sessionDetails: this.sessionDetails
+    }, httpOptions);
   }
 
 }

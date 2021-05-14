@@ -10,7 +10,7 @@ routes.get("/", async (req, res) => {
 routes.post("/", async (req, res) => {
   const product = new Product({
     name: req.body.name,
-    password: req.body.password,
+    
   });
   try {
     const savedUser = await user.save();

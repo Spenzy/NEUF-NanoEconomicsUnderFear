@@ -68,7 +68,7 @@ export class Dass21sheetComponent implements OnInit {
     this.scores.depressionScore = this.calculateScore(this.depressionIndexes);
     this.scores.anxietyScore = this.calculateScore(this.anxietyIndexes);
     this.scores.stressScore = this.calculateScore(this.stressIndexes);
-    this.trackerService.startSession();
+    this.trackerService.startSession(this.scores);
     console.log(this.scores);
 
     const dialogRef = this.dialog.open(ResultmodalComponent, {

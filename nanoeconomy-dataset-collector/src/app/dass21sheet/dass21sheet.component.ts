@@ -8,6 +8,7 @@ import {AuthService} from '../services/auth.service';
 import {MatDialog} from '@angular/material/dialog';
 import {ResultmodalComponent} from './resultmodal/resultmodal.component';
 import {TrackerService} from '../services/tracker.service';
+import {Router} from '@angular/router';
 
 const hostAddress = environment.SERVER_ADDRESS;
 
@@ -25,7 +26,7 @@ export class Dass21sheetComponent implements OnInit {
               private authService: AuthService,
               private langService: LanguageService,
               private trackerService: TrackerService,
-              public dialog: MatDialog) {
+              public router: Router) {
   }
 
   questionnaire: any[] = [];
@@ -70,10 +71,7 @@ export class Dass21sheetComponent implements OnInit {
     this.scores.stressScore = this.calculateScore(this.stressIndexes);
     this.trackerService.startSession(this.scores);
     console.log(this.scores);
-
-    const dialogRef = this.dialog.open(ResultmodalComponent, {
-      data: {scores: this.scores, user: this.authService.currentUser}
-    });
+    this.router.navigate(['store/products']).then(r => console.log(r));
   }
 
   changeLang(lang) {
@@ -82,7 +80,6 @@ export class Dass21sheetComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
-    this.answers = [1, 1, 2, 2, 2, 2, 2, 1, 2, 2, 3, 2, 2, 1, 2, 1, 2, 1, 0, 3, 2];
     this.currentLanguage = this.langService.getCurrentLanguage().toLowerCase();
     this.http.get<any[]>(hostAddress + '/dass/21').subscribe(
       response => {

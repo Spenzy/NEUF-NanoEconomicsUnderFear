@@ -7,39 +7,28 @@ routes.get("/", async (req, res) => {
     return res.send("Store Api functioning");
 });
 
-routes.post("/", async (req, res) => {
-  const product = new Product({
-    name: req.body.name,
-    
-  });
-  try {
-    const savedUser = await user.save();
-    res.send(savedUser);
-  } catch (error) {
-    res.status(400).send(error);
-  }
-});
+// ------------------product routing-------------------
+const productController = require('../controllers/product-controller');
+routes.post("/product", productController.addProduct);
 
 //find all products
-routes.get("/", async (req, res) => {
-  try {
-    const allProducts = await Product.find();
-    res.send(allProducts);
-  } catch (error) {
-    res.status(400).send(error);
-  }
-});
+routes.get("/product", productController.getAllProducts);
 
 //find prodcut by id
-routes.get("/:id", async (req, res) => {
-  try {
-    const foundProdcut = await Product.findById(req.params.id);
-    if (foundProdcut)
-    res.send(foundProdcut);
-    res.status(404).send();
-  } catch (error) {
-    res.status(400).send(error);
-  }
-});
+routes.get("/product/:id", productController.getProduct);
+
+// -----------------category routing----------------
+const categoryController = require('../controllers/category-controller');
+routes.post("/category", categoryController.addCategory);
+
+//find all products
+routes.get("/category", categoryController.getAllCategories);
+
+//find prodcut by id
+routes.get("/category/:id", categoryController.getCategory);
+
+//delete category by id
+routes.delete("/category/:id", categoryController.removeCategory)
+
 
 module.exports = routes;

@@ -24,6 +24,7 @@ export class LoginPage implements OnInit {
   constructor(private router: Router, private authService: AuthService, private authToken: AuthTokenService) { }
 
   ngOnInit(): void {
+      // this.authToken.loadSession();
       this.isLoggedIn = this.authToken.getStatus();
       if (this.isLoggedIn){
         this.router.navigate(['dass21']).then(err => console.log(err));
@@ -32,11 +33,11 @@ export class LoginPage implements OnInit {
 
   onSubmit(): void {
     const { username, password } = this.form;
-
     this.authService.login(username, password).subscribe(
       data => {
         this.authToken.saveSession(data.token);
         this.authToken.loadSession();
+        this.authService.getUser();
         this.router.navigate(['dass21']).then(err => console.log(err));
       },
       err => {

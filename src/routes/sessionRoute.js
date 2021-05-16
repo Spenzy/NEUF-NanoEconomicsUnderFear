@@ -7,7 +7,7 @@ routes.get("/", async (req, res) => {
 });
 
 
-const { saveSession } = require("../controllers/session-controller");
-routes.post("/save", saveSession);
+const sessionController = require("../controllers/session-controller");
+routes.post("/save", sessionController.saveSession);
 
 module.exports = routes;

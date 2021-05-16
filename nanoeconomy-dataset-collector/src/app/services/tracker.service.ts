@@ -5,7 +5,6 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {formatDate} from '@angular/common';
 import {Router} from '@angular/router';
 import {environment} from '../../environments/environment';
-import {stringify} from 'querystring';
 
 const hostAddress = environment.SERVER_ADDRESS;
 
@@ -76,7 +75,7 @@ export class TrackerService {
       data => data.endTime = formatDate(new Date(), 'short', 'en')
     );
     this.sessionDetails = this.session.value;
-    this.userID = this.authService.currentUser.value.userID;
+    this.userID = this.authService.currentUser.value.id;
     return this.http.post(hostAddress + '/session' + '/save', {
       userID: this.userID,
       dassScore: this.dassScores,

@@ -55,8 +55,8 @@ exports.loginUser = (req, res) => {
       if (isMatch && !err) {
         return res.status(200).json({
           //token creation
-          token: jwt.sign({ id: user.id, username: user.username, isAdmin: user.isAdmin }, config.jwtSecret, {
-          expiresIn: 50 //token expires in 6hrs
+          token: jwt.sign({ id: user._id, username: user.username, isAdmin: user.isAdmin }, config.jwtSecret, {
+          expiresIn: 1200 //token expires in 20mins
           })
         });
       } else {

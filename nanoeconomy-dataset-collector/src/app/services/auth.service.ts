@@ -41,7 +41,7 @@ export class AuthService {
 
   // logs user out and deletes token
   logout(): Subscription {
-    return this.http.get(hostAddress + api + '/logout').subscribe(
+    return this.http.get(hostAddress + api + '/logout', httpOptions).subscribe(
       data => {
         this.authToken.destroySession();
       },
@@ -53,9 +53,8 @@ export class AuthService {
 
   getUser(): any {
     this.currentUser.next({
-      userID: this.authToken.getPayload().id,
+      id: this.authToken.getPayload().id,
       username: this.authToken.getPayload().username,
-      isAdmin: this.authToken.getPayload().isAdmin,
       isLoggedIn: this.authToken.getStatus()
     });
   }

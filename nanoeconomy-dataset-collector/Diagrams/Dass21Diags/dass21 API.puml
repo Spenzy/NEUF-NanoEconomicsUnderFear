@@ -1,0 +1,25 @@
+@startuml
+
+participant Client
+participant dassRoute as dass
+control passport as pass
+entity dass21
+
+Client -> dass: GET(), Auth: Bearer token
+dass -> pass: "/21", authenticate("jwt")
+activate pass
+alt Success: Authenticated
+  dass <- pass: done(null, user)
+  dass -> dass21: request DASS21
+  activate dass21
+  dass <- dass21: DASS21 questions
+  deactivate dass21
+  Client <- dass: DASS21 questions
+
+else Failure: Unauthorized
+  dass <<-- pass:done(null,false)
+  deactivate pass
+  Client <<-- dass: http Response(401)\n Unauthorized
+end
+
+@enduml

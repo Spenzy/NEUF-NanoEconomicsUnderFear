@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import {Dass21sheetComponent} from './dass21sheet/dass21sheet.component';
+import {AuthService} from './services/auth.service';
 
 const routes: Routes = [
   {
@@ -23,11 +24,12 @@ const routes: Routes = [
   {
     path: 'dass21',
     component: Dass21sheetComponent,
-    // canActivate: [AuthService]
+    canActivate: [AuthService]
   },
   {
-    path: 'marketplace',
-    loadChildren: () => import('./store/marketplace/marketplace.module').then( m => m.MarketplacePageModule)
+    path: 'store',
+    loadChildren: () => import('./store/store.module').then( m => m.StorePageModule),
+    // canActivate: [AuthService]
   }
 ];
 

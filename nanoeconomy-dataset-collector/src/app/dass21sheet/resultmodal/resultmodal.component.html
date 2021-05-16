@@ -1,6 +1,7 @@
 <div class="container">
-  <h1 mat-dialog-title>Hi {{data.user.userID}}</h1>
+  <h1 mat-dialog-title>Hi {{data.user.username | json}}</h1>
   <div mat-dialog-content>
+    <pre>{{data.user.id| json}}</pre>
     <p>Your dass 21 scores are :</p>
     <pre>{{data.scores | json}}</pre>
     <pre>{{[(session)] | json}}</pre>

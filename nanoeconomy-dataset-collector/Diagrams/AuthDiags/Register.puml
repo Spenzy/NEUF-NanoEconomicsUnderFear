@@ -1,7 +1,7 @@
 @startuml
 actor User
-boundary registerPage as register
-participant authService as auth <<service>>
+boundary RegisterPage as register
+participant AuthService as auth <<service>>
 
 participant AuthAPI
 
@@ -11,7 +11,7 @@ auth -> AuthAPI:"/auth/register"\n POST(username, email, password)
 alt Success: Logged in
   auth <- AuthAPI:http Response(200):\n{"msg":"success"}
   register <- auth: http Response(200):\n{"msg":"success"}
-  register -> User: redirect(loginPage)
+  register -> User: redirect("login")
 else Failure: failed to register
   auth <- AuthAPI:http Response(400):{msg}
   register <- auth: http Response(400):{msg}

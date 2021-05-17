@@ -7,6 +7,7 @@ participant AuthService as auth <<service>>
 participant AuthAPI
 
 User -> login: Log into account
+
 activate login
 login -> auth: login(username, password)
 activate auth

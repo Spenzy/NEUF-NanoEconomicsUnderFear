@@ -7,7 +7,7 @@ routes.get("/", async (req, res) => {
 
 const passport = require("passport");
 const DASS21_DEF = require("../models/dass21")
-routes.get("/21", passport.authenticate("jwt", { session: false }),  
+routes.get("/21",  
   async (req, res) => {
     res.status(200).send(DASS21_DEF);
 });

@@ -24,7 +24,7 @@ const routes: Routes = [
   {
     path: 'dass21',
     component: Dass21sheetComponent,
-    canActivate: [AuthService]
+    // canActivate: [AuthService]
   },
   {
     path: 'store',

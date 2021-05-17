@@ -53,10 +53,13 @@ exports.loginUser = (req, res) => {
     //check password
     user.comparePassword(req.body.password, async(err, isMatch) => {
       if (isMatch && !err) {
-        return res.status(200).json({
+        return await res.status(200).json({
           //token creation
           token: jwt.sign({ id: user._id, username: user.username, isAdmin: user.isAdmin }, config.jwtSecret, {
-          expiresIn: 1200 //token expires in 20mins
+          expiresIn: 21600 //token expires in 6hrs
+          }),
+          refreshToken: jwt.sign({ id: user._id, username: user.username, isAdmin: user.isAdmin }, config.jwtRefreshSecret, {
+          expiresIn: 21600 //token expires in 6hrs
           })
         });
       } else {

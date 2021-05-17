@@ -26,7 +26,8 @@ export class Dass21sheetComponent implements OnInit {
               private authService: AuthService,
               private langService: LanguageService,
               private trackerService: TrackerService,
-              public router: Router) {
+              public router: Router,
+              public dialog: MatDialog) {
   }
 
   questionnaire: any[] = [];
@@ -71,7 +72,9 @@ export class Dass21sheetComponent implements OnInit {
     this.scores.stressScore = this.calculateScore(this.stressIndexes);
     this.trackerService.startSession(this.scores);
     console.log(this.scores);
-    this.router.navigate(['store/products']).then(r => console.log(r));
+    const dialogRef = this.dialog.open(ResultmodalComponent, {
+      data: {scores: this.scores, user: this.authService.currentUser}
+    });
   }
 
   changeLang(lang) {

@@ -10,6 +10,7 @@ import { StorePage } from './store.page';
 import {ProductListComponent} from './product-list/product-list.component';
 import {ProductComponent} from './product/product.component';
 import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import {MatButtonModule} from '@angular/material/button';
     FormsModule,
     IonicModule,
     StorePageRoutingModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
   ],
   declarations: [StorePage, ProductListComponent, ProductComponent]
 })

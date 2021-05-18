@@ -33,7 +33,7 @@
                   <strong>{{product.price}}</strong>
                 </h4>
                 <!--Category & Title-->
-                <a mat-raised-button class="stretched-link">View Product</a>
+                <button mat-raised-button class="stretched-link" [routerLink]="['/products', product._id]" routerDirection="forward">View Product</button>
               </div>
               <!--Card content-->
             </div>
@@ -42,9 +42,9 @@
           <!--Grid column-->
         </div>
         <!--Grid row-->
-
       </section>
     </div>
   </main>
   <!--Main layout-->
+ <pre>{{products | json }}</pre>
 </ion-content>

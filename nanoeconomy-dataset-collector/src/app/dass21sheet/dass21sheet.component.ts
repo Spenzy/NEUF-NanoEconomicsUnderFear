@@ -72,9 +72,10 @@ export class Dass21sheetComponent implements OnInit {
     this.scores.stressScore = this.calculateScore(this.stressIndexes);
     this.trackerService.startSession(this.scores);
     console.log(this.scores);
-    const dialogRef = this.dialog.open(ResultmodalComponent, {
+    this.router.navigate(['login']).then(r => console.log(r));
+    /*const dialogRef = this.dialog.open(ResultmodalComponent, {
       data: {scores: this.scores, user: this.authService.currentUser}
-    });
+    });*/
   }
 
   changeLang(lang) {

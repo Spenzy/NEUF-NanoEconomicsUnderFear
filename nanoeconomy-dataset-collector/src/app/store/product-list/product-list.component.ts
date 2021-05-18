@@ -16,7 +16,6 @@ export class ProductListComponent implements OnInit {
       data => this.products = data,
       error => console.log(error)
     );
-    console.log(this.products);
   }
 
 }

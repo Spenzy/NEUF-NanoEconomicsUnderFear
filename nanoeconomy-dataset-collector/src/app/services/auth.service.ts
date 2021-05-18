@@ -44,6 +44,7 @@ export class AuthService {
     return this.http.get(hostAddress + api + '/logout', httpOptions).subscribe(
       data => {
         this.authToken.destroySession();
+        this.router.navigate(['login']).then(err => console.log(err));
       },
       err => {
         console.log(err);
@@ -51,8 +52,8 @@ export class AuthService {
     );
   }
 
-  getUser(): any {
-    this.currentUser.next({
+  async getUser(){
+    await this.currentUser.next({
       id: this.authToken.getPayload().id,
       username: this.authToken.getPayload().username,
       isLoggedIn: this.authToken.getStatus()

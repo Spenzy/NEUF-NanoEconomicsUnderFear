@@ -58,13 +58,16 @@ export class TrackerService {
       );
     } else if (productNbr) {
       this.session.subscribe(
-        data => data.activity.push({
-          location: this.currentLocation,
-          message,
-          reached,
-          productNbr,
-          time: formatDate(new Date(), 'mediumTime', 'en')
-        }),
+        data => {
+          data.activity.push({
+            location: this.currentLocation,
+            message,
+            reached,
+            productNbr,
+            time: formatDate(new Date(), 'mediumTime', 'en')
+          });
+          console.log(this.session);
+        },
         error => console.log(error)
       );
     }

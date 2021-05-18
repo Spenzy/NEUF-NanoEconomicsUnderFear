@@ -5,3 +5,8 @@
 .mat-form-field {
   margin-top: 1rem;
 }
+
+.nextline-stepper .mat-step-label.mat-step-label {
+  text-overflow: inherit;
+  white-space: normal;
+}

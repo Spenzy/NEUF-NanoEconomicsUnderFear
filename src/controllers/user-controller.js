@@ -1,6 +1,7 @@
 var User = require("../models/user");
 const jwt = require("jsonwebtoken");
 const config = require("../config/config");
+const jwtHelper = require("../helpers/jwt-helper");
 
 //this function permits user registration
 exports.registerUser = async (req, res) => {
@@ -53,15 +54,10 @@ exports.loginUser = (req, res) => {
     //check password
     user.comparePassword(req.body.password, async(err, isMatch) => {
       if (isMatch && !err) {
-        return await res.status(200).json({
-          //token creation
-          token: jwt.sign({ id: user._id, username: user.username, isAdmin: user.isAdmin }, config.jwtSecret, {
-          expiresIn: 21600 //token expires in 6hrs
-          }),
-          refreshToken: jwt.sign({ id: user._id, username: user.username, isAdmin: user.isAdmin }, config.jwtRefreshSecret, {
-          expiresIn: 21600 //token expires in 6hrs
-          })
-        });
+        //access token creation
+        const token = await jwtHelper.createToken(user);
+        const refreshToken = await jwtHelper.createRefresh(user);
+        return res.status(200).json({ token, refreshToken });
       } else {
         return res.status(400).json({
           msg: "mismatched email and password",

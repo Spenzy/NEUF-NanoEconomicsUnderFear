@@ -3,7 +3,7 @@ import {environment} from '../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {AuthTokenService} from './auth-token.service';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 
 const hostAddress = environment.SERVER_ADDRESS;
@@ -16,8 +16,18 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class StoreService {
+  Cart: BehaviorSubject<any>;
 
   constructor(private http: HttpClient) {
+  }
+
+  addToCart() {
+  }
+
+  getCart() {
+  }
+
+  removeFromCart() {
   }
 
   // sends request to server and receives all products in db.
@@ -26,7 +36,7 @@ export class StoreService {
   }
 
   // sends request to server and receives specific product in db.
-  getProducts(id): Observable<any> {
+  getProduct(id): Observable<any> {
     return this.http.get(hostAddress + api + '/product/' + id, httpOptions);
   }
 

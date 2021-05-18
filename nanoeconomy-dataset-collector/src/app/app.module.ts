@@ -28,6 +28,7 @@ import {NavbarComponent} from './navbar/navbar.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
 import {ResultmodalComponent} from './dass21sheet/resultmodal/resultmodal.component';
+import { IonicStorageModule } from '@ionic/storage-angular';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import {ResultmodalComponent} from './dass21sheet/resultmodal/resultmodal.compon
     imports: [
         BrowserModule,
         IonicModule.forRoot(),
+        IonicStorageModule.forRoot(),
         AppRoutingModule,
         HttpClientModule,
         BrowserAnimationsModule,

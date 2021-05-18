@@ -10,8 +10,8 @@
 
 <ion-content>
   <div class="container mat-elevation-z15">
-    <div class="row app-body h-75">
-      <div class="col d-flex align-items-center">
+    <div class="row app-body">
+      <div class="col align-items-center">
         <form
           name="form"
           (ngSubmit)="f.form.valid && onSubmit()"
@@ -23,20 +23,11 @@
               mode="indeterminate">
             </mat-progress-spinner>
           </div>
-            <mat-vertical-stepper linear>
-            <div *ngFor="let question of questionnaire;let questIndex=index" >
-              <mat-step errorMessage="Name is required.">
-                <ng-template matStepLabel>
-                  <div class="row">
-                    <div class="col-6" style="margin-top: 10px;">
+            <mat-vertical-stepper class="nextline-stepper" linear>
+            <div *ngFor="let question of questionnaire;let questIndex=index">
+              <mat-step errorMessage="Answer is required.">
+                <ng-template class="mat-step-label" matStepLabel>
                       {{question.labels | language}}
-                    </div>
-                    <div class="col-6">
-                      <div class="alert alert-success"
-                           style="float: right;"
-                           *ngIf="question.answerValue">{{question.answerValue.labels | language}} </div>
-                    </div>
-                  </div>
                 </ng-template>
                 <mat-form-field [ngStyle]="{'text-align': currentLanguage == 'ar' ? 'right' : '' }" style="width: 50%;">
                   <mat-label>

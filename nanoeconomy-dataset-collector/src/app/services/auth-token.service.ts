@@ -1,23 +1,25 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import jwtDecode from 'jwt-decode';
+import { Storage } from '@ionic/storage-angular';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class AuthTokenService {
+export class AuthTokenService{
   protected isLoggedIn = false;
   protected authToken: string;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private storage: Storage) {
+    this.storage.create();
     this.isLoggedIn = false;
     this.authToken = null;
   }
 
-  loadSession() {
-    const token = window.localStorage.getItem('token');
-    if (token){
+  async loadSession() {
+    const token = await this.storage.get('token');
+    if (token) {
       this.authToken = token;
       this.isLoggedIn = true;
     }
@@ -26,11 +28,11 @@ export class AuthTokenService {
   destroySession() {
     this.isLoggedIn = false;
     this.authToken = null;
-    window.localStorage.clear();
+    this.storage.clear();
   }
 
-  saveSession(authToken){
-    window.localStorage.setItem('token', authToken);
+  async saveSession(authToken) {
+    await this.storage.set('token', authToken);
   }
 
   getPayload(): any {

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="302ab092-c763-4624-98d9-6cb0524ed21d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.gradle/5.6.4/fileChanges/last-build.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/5.6.4/fileHashes/fileHashes.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/5.6.4/gc.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/vcs-1/gc.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/android.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/assets/public/store-store-module.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/assets/public/store-store-module.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/capacitor-cordova-android-plugins/.gradle/6.7/fileChanges/last-build.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/capacitor-cordova-android-plugins/.gradle/6.7/fileHashes/fileHashes.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/capacitor-cordova-android-plugins/.gradle/6.7/gc.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/capacitor-cordova-android-plugins/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/capacitor-cordova-android-plugins/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/capacitor-cordova-android-plugins/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/capacitor-cordova-android-plugins/.gradle/configuration-cache/gc.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/capacitor-cordova-android-plugins/.gradle/vcs-1/gc.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/capacitor-cordova-android-plugins/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/capacitor-cordova-android-plugins/cordova.variables.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/capacitor-cordova-android-plugins/src/main/AndroidManifest.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/capacitor-cordova-android-plugins/src/main/java/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/capacitor-cordova-android-plugins/src/main/res/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/.npmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/proguard-rules.pro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/getcapacitor/myapp/ExampleInstrumentedTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/dass21sheet/dass21sheet.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/dass21sheet/dass21sheet.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/services/tracker.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/services/tracker.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/store/product-list/product-list.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/store/product-list/product-list.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/store/product-list/product-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/store/product-list/product-list.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/store/product/product.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/store/product/product.component.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="1sl1Hy7SUpseFCzHVIGECtoWcp1" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.17" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.externalDependencies" />
+  </component>
+  <component name="PsdUISettings">
+    <option name="MODULE_TAB" value="Signing Configs" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="302ab092-c763-4624-98d9-6cb0524ed21d" name="Default Changelist" comment="" />
+      <created>1621432277665</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1621432277665</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="201" y="110" key="#PSD" timestamp="1621434250998">
+      <screen x="0" y="0" width="1368" height="729" />
+    </state>
+    <state x="201" y="110" key="#PSD/0.0.1368.729@0.0.1368.729" timestamp="1621434250998" />
+    <state x="-28" y="21" width="998" height="708" key="SettingsEditor" timestamp="1621433977468">
+      <screen x="0" y="0" width="1368" height="729" />
+    </state>
+    <state x="-28" y="21" width="998" height="708" key="SettingsEditor/0.0.1368.729@0.0.1368.729" timestamp="1621433977468" />
+    <state x="347" y="50" width="672" height="678" key="search.everywhere.popup" timestamp="1621434000830">
+      <screen x="0" y="0" width="1368" height="729" />
+    </state>
+    <state x="347" y="50" width="672" height="678" key="search.everywhere.popup/0.0.1368.729@0.0.1368.729" timestamp="1621434000830" />
+  </component>
+</project>

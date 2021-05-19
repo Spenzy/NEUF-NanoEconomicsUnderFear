@@ -78,7 +78,7 @@ export class TrackerService {
       data => data.endTime = formatDate(new Date(), 'short', 'en')
     );
     this.sessionDetails = this.session.value;
-    this.userID = this.authService.currentUser.value.id;
+    this.userID = '6092c7a13f88191cdcfcd2ea';
     return this.http.post(hostAddress + '/session' + '/save', {
       userID: this.userID,
       dassScore: this.dassScores,

@@ -33,7 +33,10 @@
                   <strong>{{product.price}}</strong>
                 </h4>
                 <!--Category & Title-->
-                <button mat-raised-button class="stretched-link" [routerLink]="['/products', product._id]" routerDirection="forward">View Product</button>
+                <button mat-raised-button class="stretched-link"
+                        (click)="viewProduct(product)"
+                        [routerLink]="['/products', product._id]"
+                        routerDirection="forward">View Product</button>
               </div>
               <!--Card content-->
             </div>

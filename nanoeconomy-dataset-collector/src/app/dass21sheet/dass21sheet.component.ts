@@ -72,10 +72,10 @@ export class Dass21sheetComponent implements OnInit {
     this.scores.stressScore = this.calculateScore(this.stressIndexes);
     this.trackerService.startSession(this.scores);
     console.log(this.scores);
-    this.router.navigate(['login']).then(r => console.log(r));
-    /*const dialogRef = this.dialog.open(ResultmodalComponent, {
+    // this.router.navigate(['login']).then(r => console.log(r));
+    const dialogRef = this.dialog.open(ResultmodalComponent, {
       data: {scores: this.scores, user: this.authService.currentUser}
-    });*/
+    });
   }
 
   changeLang(lang) {
@@ -84,6 +84,7 @@ export class Dass21sheetComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
+    this.answers = [2, 1, 2, 0, 0, 1, 0, 2, 0, 3, 0, 2, 0, 1, 0, 2, 0, 1, 1, 3, 3];
     this.currentLanguage = this.langService.getCurrentLanguage().toLowerCase();
     this.http.get<any[]>(hostAddress + '/dass/21').subscribe(
       response => {

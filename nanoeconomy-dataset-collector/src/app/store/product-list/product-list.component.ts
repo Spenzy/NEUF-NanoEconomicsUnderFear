@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {StoreService} from '../../services/store.service';
+import {MatDialog} from '@angular/material/dialog';
+import {ProductComponent} from '../product/product.component';
+import {TrackerService} from '../../services/tracker.service';
 
 @Component({
   selector: 'app-product-list',
@@ -8,8 +11,14 @@ import {StoreService} from '../../services/store.service';
 })
 export class ProductListComponent implements OnInit {
   products: any;
-  empty: false;
-  constructor(private storeService: StoreService) { }
+  constructor(private storeService: StoreService, private trackerService: TrackerService, public dialog: MatDialog) { }
+
+  viewProduct(product){
+    this.trackerService.timeStamp('clicked on' + product.name, 'clicked' );
+    const dialogRef = this.dialog.open(ProductComponent, {
+      data: {product}
+    });
+  }
 
   ngOnInit() {
     this.storeService.getAllProducts().subscribe(

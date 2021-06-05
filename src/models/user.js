@@ -42,7 +42,8 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
   personalInfo: PERSONAL_INFO,
-  isAdmin:false
+  isAdmin:false,
+  isLoggedIn: false
 });
 
 //password hashing using bcrypt

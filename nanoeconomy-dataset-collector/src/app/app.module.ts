@@ -8,7 +8,7 @@ import {IonicModule, IonicRouteStrategy} from '@ionic/angular';
 import {AuthInterceptor} from './interceptor/auth.interceptor';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
-import {Dass21sheetComponent} from './dass21sheet/dass21sheet.component';
+import {Dass21sheetComponent} from './Pages/dass21sheet/dass21sheet.component';
 import {LanguagePipe} from './pipes/language.pipe';
 
 
@@ -24,15 +24,27 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
-import {NavbarComponent} from './navbar/navbar.component';
+import {NavbarComponent} from './Layout/navbar/navbar.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
-import {ResultmodalComponent} from './dass21sheet/resultmodal/resultmodal.component';
-import { IonicStorageModule } from '@ionic/storage-angular';
+import {ResultmodalComponent} from './Pages/dass21sheet/resultmodal/resultmodal.component';
+import {IonicStorageModule} from '@ionic/storage-angular';
+import {NotFoundComponent} from './Pages/not-found/not-found.component';
+import {HasAuthDirective} from './directives/has-auth.directive';
+import {StorePageModule} from './Pages/store/store.module';
 
 
 @NgModule({
-    declarations: [AppComponent, Dass21sheetComponent, LanguagePipe, HasAdminDirective, NavbarComponent, ResultmodalComponent],
+  declarations: [
+    AppComponent,
+    Dass21sheetComponent,
+    LanguagePipe,
+    HasAdminDirective,
+    ResultmodalComponent,
+    NotFoundComponent,
+    NavbarComponent,
+    HasAuthDirective
+  ],
     entryComponents: [],
     imports: [
         BrowserModule,
@@ -53,13 +65,14 @@ import { IonicStorageModule } from '@ionic/storage-angular';
         ReactiveFormsModule,
         MatButtonModule,
         MatIconModule,
-        MatDialogModule
+        MatDialogModule,
+        StorePageModule
     ],
     providers: [{provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
         {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
     bootstrap: [AppComponent],
-    exports: [
-        NavbarComponent
-    ]
+  exports: [
+    NavbarComponent
+  ]
 })
 export class AppModule {}

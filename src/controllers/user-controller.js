@@ -55,9 +55,14 @@ exports.loginUser = (req, res) => {
     user.comparePassword(req.body.password, async(err, isMatch) => {
       if (isMatch && !err) {
         //access token creation
-        const token = await jwtHelper.createToken(user);
-        const refreshToken = await jwtHelper.createRefresh(user);
-        return res.status(200).json({ token, refreshToken });
+        const token = await jwt.sign(
+          { id: user._id, isAdmin: user.isAdmin },
+            config.jwtSecret, 
+          { expiresIn: 86400 }); //token expires in 1day
+          
+        // const refreshToken = await jwtHelper.createRefresh(user);
+        User.findOneAndUpdate({id: user._id}, {isLoggedIn: true})
+        return res.status(200).json(token);
       } else {
         return res.status(400).json({
           msg: "mismatched email and password",
@@ -85,6 +90,7 @@ exports.getUser = async (req, res) => {
 
 //this function logs out user
 exports.logoutUser = (req, res) => {
+  User.findOneAndUpdate({id: req.user._id},{isLoggedIn: false})
   res.token = null;
   res.status(200).json({msg : "logged out"});
 };

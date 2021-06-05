@@ -47,3 +47,5 @@ const port = config.port || 8080;
 const host = config.host || 'http://localhost'
 app.listen(port);
 console.log("Running at " + host + ":" + port);
+
+module.exports = app

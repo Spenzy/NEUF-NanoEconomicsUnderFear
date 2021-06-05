@@ -1,7 +1,8 @@
 import {NgModule} from '@angular/core';
 import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
-import {Dass21sheetComponent} from './dass21sheet/dass21sheet.component';
+import {Dass21sheetComponent} from './Pages/dass21sheet/dass21sheet.component';
 import {AuthService} from './services/auth.service';
+import {NotFoundComponent} from './Pages/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -11,15 +12,15 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./Pages/home/home.module').then(m => m.HomePageModule)
   },
   {
     path: 'login',
-    loadChildren: () => import('./auth/login/login.module').then(m => m.LoginPageModule)
+    loadChildren: () => import('./Pages/auth/login/login.module').then(m => m.LoginPageModule)
   },
   {
     path: 'register',
-    loadChildren: () => import('./auth/register/register.module').then( m => m.RegisterPageModule)
+    loadChildren: () => import('./Pages/auth/register/register.module').then(m => m.RegisterPageModule)
   },
   {
     path: 'dass21',
@@ -28,8 +29,20 @@ const routes: Routes = [
   },
   {
     path: 'store',
-    loadChildren: () => import('./store/store.module').then( m => m.StorePageModule),
+    loadChildren: () => import('./Pages/store/store.module').then(m => m.StorePageModule),
     // canActivate: [AuthService]
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./Pages/admin/admin.module').then(m => m.AdminPageModule)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./Pages/profile/profile.module').then(m => m.ProfilePageModule)
+  },
+  {
+    path: '**',
+    component: NotFoundComponent
   }
 ];
 

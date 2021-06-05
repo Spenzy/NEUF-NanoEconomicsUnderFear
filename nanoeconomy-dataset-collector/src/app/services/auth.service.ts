@@ -41,7 +41,7 @@ export class AuthService {
 
   // logs user out and deletes token
   logout(): Subscription {
-    return this.http.get(hostAddress + api + '/logout', httpOptions).subscribe(
+    return this.http.post(hostAddress + api + '/logout', httpOptions).subscribe(
       data => {
         this.authToken.destroySession();
         this.router.navigate(['login']).then(err => console.log(err));
@@ -52,16 +52,20 @@ export class AuthService {
     );
   }
 
-  async getUser(){
-    await this.currentUser.next({
-      id: this.authToken.getPayload().id,
-      username: this.authToken.getPayload().username,
+  saveUser(user){
+    this.currentUser.next({
+      id: user._id,
+      username: user.username,
       isLoggedIn: this.authToken.getStatus()
     });
   }
 
   isAdmin(): any {
     return this.authToken.getPayload().isAdmin;
+  }
+
+  isLogged(){
+    return this.authToken.getStatus();
   }
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
@@ -72,6 +76,5 @@ export class AuthService {
     }
     return this.authToken.getStatus();
   }
-
 
 }

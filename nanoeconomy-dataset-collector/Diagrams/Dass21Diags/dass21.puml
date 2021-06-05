@@ -30,12 +30,11 @@ alt Success: Available token
     dass21comp -> User: DASS21 questions
   end
   User -> dass21comp: Answers
-  User <- dass21comp: redirect("marketplace")
+  User <-- dass21comp: redirect("marketplace")
 else Failure: Empty token
-  inter <- dassAPI:http Response(401):{Unauthorized}
-  dass21comp <- inter: http Response(401):{Unauthorized}
-  User <- dass21comp: redirect(login)
+  inter <-- dassAPI:http Response(401):{Unauthorized}
+  dass21comp <-- inter: http Response(401):{Unauthorized}
+  User <-- dass21comp: redirect(login)
   deactivate dass21comp
 end
-
 @enduml

@@ -6,26 +6,31 @@ participant AuthTokenService as authToken <<service>>
 participant AuthService as auth <<service>>
 participant AuthAPI
 
-User -> login: Log into account
-
+User -> login: Provide login information
 activate login
-login -> auth: login(username, password)
-activate auth
-auth -> AuthAPI:"/auth/login"\n POST(username, password)
-alt Success: Logged in
-  auth <- AuthAPI:http Response(200):\n{token, expiresIn}
-  login <- auth: http Response(200):\n{token, expiresIn}
-  login -> authToken**: saveSession(data)\n loadSession()
-  activate authToken
-  authToken -> login: {token, isLoggedIn}
-  deactivate authToken
-  login -> User: redirect("dass21")
-else Failure: failed to login
-  auth <- AuthAPI:http Response(400):{msg}
-  login <- auth: http Response(400):{msg}
-  deactivate auth
-  login -> login: errMsg = 400 +':'+ msg
-  User <- login: errMsg
+login -> login: validate input fields
+alt Success: valid fields
+  login -> auth: login(username, password)
+  activate auth
+  auth -> AuthAPI:"/auth/login"\n POST(username, password)
+  alt Success: Logged in
+    auth <-- AuthAPI:http Response(200):\n{token, expiresIn}
+    login <-- auth: http Response(200):\n{token, expiresIn}
+    login -> authToken**: saveSession(data)\n loadSession()
+    activate authToken
+    authToken -> login: {token, isLoggedIn}
+    deactivate authToken
+    login --> User: redirect("dass21")
+  else Failure: failed to login
+    auth <-- AuthAPI:http Response(400):{msg}
+    login <-- auth: http Response(400):{msg}
+    deactivate auth
+    login -> login: errMsg = 400 +':'+ msg
+    User <-- login: errMsg
+
+  end
+else Failure: invalid fields
+  login --> User: error msg
   deactivate login
 end
 

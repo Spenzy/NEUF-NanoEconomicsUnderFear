@@ -4,8 +4,6 @@ import {Injectable} from '@angular/core';
 import {AuthTokenService} from '../services/auth-token.service';
 import {Observable} from 'rxjs';
 
-const TOKEN_HEADER = 'Authorization';       // for Spring Boot back-end
-
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   constructor(private authToken: AuthTokenService) { }
@@ -13,8 +11,9 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let authReq = req;
     const token = this.authToken.getToken();
+    console.log(token);
     if (token != null) {
-      authReq = req.clone({ headers: req.headers.set(TOKEN_HEADER, 'Bearer ' + token) });
+      authReq = req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + token) });
     }
     return next.handle(authReq);
   }

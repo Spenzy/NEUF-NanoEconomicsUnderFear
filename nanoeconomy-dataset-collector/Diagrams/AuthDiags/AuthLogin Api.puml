@@ -1,11 +1,11 @@
 @startuml
 
-participant Client
+participant Ionic
 participant authRoute as auth
 control userController as userC
 database innoDB
 
-Client -> auth: POST(username, password)
+Ionic -> auth: POST(username, password)
 auth -> userC: "/login" -> loginUser
 activate userC
 userC -> userC: validate Info
@@ -19,22 +19,21 @@ alt Success: Required info provided
     userC -> userC: Compare password
     alt Success: Correct password
       userC -> userC:token : jwt.sign(\n{id,username,isAdmin},secret),\nexpiresIn: expiration time
-      auth <- userC:{token, expiresIn}(200)
-
-      Client <- auth: http Response(200):\n{token, expiresIn}
+      auth <-- userC:{token, expiresIn}(200)
+      Ionic <-- auth: http Response(200):\n{token, expiresIn}
     else Failure: Wrong password
-      auth <- userC:{"msg": "mismatched email\n and password",}(400)
-      Client <- auth: http Response(400):{"msg": "mismatched \nemail and password"}
+      auth <-- userC:{"msg": "mismatched email\n and password",}(400)
+      Ionic <-- auth: http Response(400):{"msg": "mismatched \nemail and password"}
     end
   else Failure: User not found
     userC <<-- innoDB:fail response
     deactivate innoDB
     auth <<-- userC:{"msg":"User not found"}(400)
-    Client <<-- auth: http Response(400)\n {"msg":"User not found"}
+    Ionic <<-- auth: http Response(400)\n {"msg":"User not found"}
     end
 else Failure: missing information
   auth <<-- userC:{"msg":"missing required\n information"}(400)
   deactivate userC
-  Client <<-- auth: http Response(400)\n {"msg":"missing required information"}
+  Ionic <<-- auth: http Response(400)\n {"msg":"missing required information"}
 end
 @enduml

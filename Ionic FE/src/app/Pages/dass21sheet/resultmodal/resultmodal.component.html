@@ -1,0 +1,15 @@
+<div class="container">
+  <h1 mat-dialog-title>Hi {{data.user.username | json}}</h1>
+  <div mat-dialog-content>
+    <pre>{{data.user.id| json}}</pre>
+    <p>Your dass 21 scores are :</p>
+    <pre>{{data.scores | json}}</pre>
+    <pre>{{[(session)] | json}}</pre>
+    <button mat-button (click)="OnClick('clicked on Button','clicked','ProdID')">Click</button>
+    <button mat-button (click)="OnClick('clicked on 2nd Button','discount','productid')">Click2</button>
+    <button mat-button (click)="finishSession()">End Session</button>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="this.dialogRef.close()">No Thanks</button>
+  </div>
+</div>

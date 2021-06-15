@@ -1,0 +1,32 @@
+@startuml
+
+  package controllers #FDED9B{
+    class CategoryController <<controller>>
+    class ProductController <<controller>>
+  }
+  package middleware #FDB0E0{
+    class passport
+  }
+  package config #F1F2F9{
+    class conf
+  }
+  package models #D4D7EC{
+    class Product <<model>>
+    class Category <<model>>
+  }
+  package routes #fec5bb{
+    class authRoute <<route>>
+  }
+  package test #E43A50{
+    class authTest
+  }
+
+
+
+hide members
+controllers ..> middleware: <<use>>
+middleware ..> config: <<use>>
+controllers ..> models: <<use>>
+routes ..> controllers: <<use>>
+
+@enduml

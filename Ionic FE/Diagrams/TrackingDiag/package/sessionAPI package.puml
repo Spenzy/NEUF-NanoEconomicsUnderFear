@@ -1,0 +1,31 @@
+@startuml
+
+  package controllers #FDED9B{
+    class session-controller <<controller>>
+  }
+  package middleware #FDB0E0{
+    class passport
+  }
+  package config #F1F2F9{
+    class conf
+  }
+  package models #D4D7EC{
+    class Session <<model>>
+  }
+  package routes #fec5bb{
+    class sessionRoute <<route>>
+  }
+  package test #E43A50{
+    class sessionTest
+  }
+
+
+hide members
+test .[hidden]..> config: <<use>>
+controllers ..> middleware: <<use>>
+middleware ..> config: <<use>>
+controllers ...> models: <<use>>
+routes ..> controllers: <<use>>
+
+
+@enduml

@@ -1,0 +1,33 @@
+@startuml
+hide footbox
+
+actor User
+boundary ProductListPage as Store
+participant HTTPInterceptor as inter <<interceptor>>
+participant AuthTokenService as token <<Service>>
+participant storeAPI
+
+User -> Store: clicks on browse proucts
+activate Store
+Store -> inter: "/store/product"\n GET()
+inter -[hidden]> token**
+inter -> token: getToken()
+activate token
+inter <- token: token
+deactivate token
+alt Success: Available token
+  inter -> storeAPI:"/store/product"\n GET(), Auth: Bearer token)
+  inter <- storeAPI:http Response(200):\n allProducts
+  Store <- inter:http Response(200):\n allProducts
+  Store -> User: Product list
+  opt change cateogory
+  User -> Store: change category ( X )
+  User <-- Store: Prodcut list [ X ]
+  end
+else Failure: Empty token
+  inter <-- storeAPI:http Response(401):{Unauthorized}
+  Store <-- inter: http Response(401):{Unauthorized}
+  User <-- Store: redirect(login)
+  deactivate Store
+end
+@enduml

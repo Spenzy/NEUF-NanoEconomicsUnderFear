@@ -1,0 +1,79 @@
+@startuml
+
+  class UserController <<controller>> {
+    registerUser()
+    loginUser()
+    getUser()
+    updateUser()
+    logoutUser()
+  }
+
+  class passport {
+    options = {jwtFromRequest, secretOrKey}
+
+    JwtStrategy()
+  }
+
+  class conf{
+    jwtSecret
+    refreshSecret
+    db
+    host
+    port
+  }
+
+  class User <<model>> {
+    PERSONAL_INFO
+    UserSchema
+
+    pre()
+    comparePassword()
+  }
+  class authRoute <<route>> {
+    routes
+  }
+
+  authRoute -> UserController
+  authRoute -> passport
+  UserController -> passport
+  UserController --> User
+  passport -> conf
+  authRoute -[hidden]> conf
+
+    note right of User::UserSchema
+         {
+           username: {
+             type: String,
+             required: true,
+             unique: true,
+             trim: true,
+           },
+           email: {
+             type: String,
+             required: true,
+             unique: true,
+             lowercase: true,
+             trim: true,
+           },
+           password: {
+             type: String,
+             required: true,
+           },
+           personalInfo: PERSONAL_INFO,
+           isAdmin:false,
+           isLoggedIn: false
+         }
+      end note
+
+    note right of User::PERSONAL_INFO
+       {
+         birthday: {type: Date},
+         Gender: {type: String},
+         Country: {type: String},
+         Education: {type: String},
+         Occupation: {type: String},
+       }
+    end note
+
+
+@enduml

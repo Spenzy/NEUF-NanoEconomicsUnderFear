@@ -1,0 +1,48 @@
+@startuml
+hide footbox
+
+actor User
+boundary Dass21sheetComponent as dass21comp
+participant TrackerService as track <<service>>
+participant HTTPInterceptor as inter <<interceptor>>
+participant languageService as lang <<service>>
+participant AuthTokenService as token <<Service>>
+
+participant dassAPI
+
+User -> dass21comp: Request
+activate dass21comp
+dass21comp -> inter: "/dass/21"\n GET()
+inter -> token: getToken()
+activate token
+inter <- token: token
+deactivate token
+alt Success: Available token
+  inter -> dassAPI:"/dass/21"\n GET(), Auth: Bearer token)
+  inter <- dassAPI:http Response(200):\n DASS21 questions
+  dass21comp <- inter:http Response(200):\n DASS21 questions
+  dass21comp -[hidden]-> lang**
+  dass21comp -> lang: getCurrentLanguage()
+  activate lang
+  dass21comp <- lang: 'en'
+  dass21comp -> User: DASS21 questions
+  opt change language
+    dass21comp -> lang: changeLanguage(lang)
+    dass21comp <- lang: 'lang'
+    deactivate lang
+    dass21comp -> User: DASS21 questions
+  end
+  User -> dass21comp: Answers
+  dass21comp -[hidden]> track**
+  dass21comp -> track: startSession(dassScores)
+  activate track
+  deactivate track
+  User <-- dass21comp: redirect("marketplace")
+else Failure: Empty token
+  inter <-- dassAPI:http Response(401):{Unauthorized}
+  dass21comp <-- inter: http Response(401):{Unauthorized}
+  User <-- dass21comp: redirect(login)
+  deactivate dass21comp
+end
+
+@enduml

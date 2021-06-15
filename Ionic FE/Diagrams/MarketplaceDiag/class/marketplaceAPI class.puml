@@ -1,0 +1,86 @@
+@startuml
+
+  class ProductController <<controller>> {
+    addProduct()
+    getAllProducts()
+    updateProduct()
+    getProduct()
+    removeProduct()
+  }
+
+  class CategoryController <<controller>> {
+    addCategory()
+    getAllCategories()
+    updateCqtegory()
+    getCategory()
+    removeCategory()
+  }
+
+  class passport {
+    options = {jwtFromRequest, secretOrKey}
+
+    JwtStrategy()
+  }
+
+  class conf{
+    jwtSecret
+    refreshSecret
+    db
+    host
+    port
+  }
+
+  class Product <<model>> {
+    ProductSchema
+  }
+
+  class Category <<model>> {
+      CategorySchema
+    }
+
+  class storeRoute <<route>> {
+    routes
+  }
+
+  storeRoute --> ProductController
+  storeRoute --> CategoryController
+  storeRoute -> passport
+
+  ProductController --> Product
+  CategoryController --> Category
+  passport --> conf
+
+  note right of Product::ProductSchema
+    {
+        name: {
+          type: String,
+          required: true,
+        },
+        images: [],
+        category: {
+          type: String,
+          required: true,
+        },
+        description: {
+          type: String,
+          required: true
+        },
+        price: {
+          type: String,
+          required: true
+        },
+        additionallInfo: [],
+    }
+  end note
+
+  note right of Category::CategorySchema
+    {
+      name: {
+        type: String,
+        required: true
+      },
+      sub: []
+    }
+  end note
+
+@enduml

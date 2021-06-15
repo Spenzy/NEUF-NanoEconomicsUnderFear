@@ -1,0 +1,62 @@
+@startuml
+
+  class passport {
+    options = {jwtFromRequest, secretOrKey}
+
+    JwtStrategy()
+  }
+
+  class conf{
+    jwtSecret
+    refreshSecret
+    db
+    host
+    port
+  }
+
+  class DASS21 <<model>> {
+    POSSIBLE_VALUES
+    DASS21_DEF
+  }
+  class dassRoute <<route>> {
+    routes
+  }
+
+  dassRoute -> passport
+  dassRoute --> DASS21
+  passport -> conf
+
+
+
+    note right of DASS21::POSSIBLE_VALUES
+      ...,
+      {
+         answerId:'S',
+         value :1,
+         labels: { en:'Some times',
+                      fr:'Quelquefois',
+                      ar:'بعض الأحيان' }
+      },
+     ...
+    end note
+
+    note right of DASS21::DASS21_DEF
+          ...,
+          {   defId:3,
+                  labels: { en:'I couldn’t seem to experience
+                                    any positive feeling at all',
+                               fr:'J’ai eu l’impression de ne pas
+                                pouvoir ressentir d’émotion positive',
+                               ar:'مل يبدو يل أن بإمكاين اإلحساس مبشاعر
+                                إجيابية على اإلطالق'
+                  },
+                  impact:{stress:false,
+                              anxiety:false,
+                              depression:true },
+                  possibleValues:POSSIBLE_VALUES
+              },
+         ...
+        end note
+
+
+@enduml

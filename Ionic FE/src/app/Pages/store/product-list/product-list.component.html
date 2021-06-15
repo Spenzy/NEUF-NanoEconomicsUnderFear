@@ -1,0 +1,66 @@
+<ion-header>
+  <app-navbar></app-navbar>
+</ion-header>
+
+<ion-content>
+  <!--Main layout-->
+  <main class="bgcustom mgcustom ion-padding-top">
+    <div class="container ion-margin-top">
+      <mat-toolbar class="ion-margin-top d-flex justify-content-between mat-elevation-z8">
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+          <mat-icon>ads_click</mat-icon>
+          <span>Browse products</span>
+        </button>
+        <button mat-button [matMenuTriggerFor]="menu">Category</button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>Item 1</button>
+        </mat-menu>
+        <span class="spacer"></span>
+
+        <input class="search-control" type="text" placeholder="Search" [(ngModel)]="searchText" #searchbar>
+      </mat-toolbar>
+
+      <section class="text-center mb-4 ion-margin-top">
+        <!--Grid row-->
+        <div class="row wow fadeIn">
+          <!--Grid column-->
+          <div class="col-lg-3 col-md-6 mb-4"
+                *ngFor="let product of products">
+            <!--Card-->
+            <div class="card mat-elevation-z5">
+              <!--Card image-->
+              <div class="view overlay">
+                <img [src]="product.images" class="card-img-top" alt="{{product.name}} product image">
+                <a>
+                  <div class="mask rgba-white-slight"></div>
+                </a>
+              </div>
+              <!--Card image-->
+              <!--Card content-->
+              <div class="card-body text-center">
+                <!--Category & Title-->
+                  <h5 class="gray-text">{{product.category}}</h5>
+                <h5>
+                  <strong> {{product.name}} </strong>
+                </h5>
+                <h4 class="font-weight-bold blue-text">
+                  <strong>{{product.price}}</strong>
+                </h4>
+                <!--Category & Title-->
+                <button mat-raised-button class="stretched-link"
+                        (click)="viewProduct(product)"
+                        [routerLink]="['/products', product._id]"
+                        routerDirection="forward">View Product</button>
+              </div>
+              <!--Card content-->
+            </div>
+            <!--Card-->
+          </div>
+          <!--Grid column-->
+        </div>
+        <!--Grid row-->
+      </section>
+    </div>
+  </main>
+  <!--Main layout-->
+</ion-content>

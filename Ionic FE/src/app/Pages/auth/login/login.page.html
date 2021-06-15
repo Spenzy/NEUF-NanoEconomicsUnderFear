@@ -1,0 +1,108 @@
+<ion-header xmlns="http://www.w3.org/1999/html">
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="bgcustom">
+    <div class="row app-body h-75">
+      <main class="col main d-flex align-items-center">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 mx-auto">
+              <div class="card-group mat-elevation-z15">
+                <div class="card p-4">
+                  <div class="card-body">
+                    <h2 class="mb-4">Sign In</h2>
+                    <form
+                      *ngIf="!isLoggedIn"
+                      name="form"
+                      (ngSubmit)="f.form.valid && onSubmit()"
+                      #f="ngForm"
+                      novalidate>
+                      <mat-form-field class="form-group mb-3">
+                        <mat-label>Username</mat-label>
+                        <input
+                          matInput
+                          placeholder="eg: BingeBuyer"
+                          type="text"
+                          id="username"
+                          name="username"
+                          [(ngModel)]="form.username"
+                          required
+                          #username="ngModel"/>
+                        <mat-error *ngIf="username.errors && f.submitted">
+                          Username is required!
+                        </mat-error>
+                      </mat-form-field>
+                      <mat-form-field class="form-group">
+                        <mat-label >Password</mat-label>
+                        <input
+                          matInput
+                          [type]="hide ? 'password' : 'text'"
+                          id="password"
+                          name="password"
+                          [(ngModel)]="form.password"
+                          required
+                          minlength="6"
+                          #password="ngModel">
+                          <a mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                          </a>
+                        <mat-error *ngIf="password.errors && f.submitted">
+                          <mat-error *ngIf="password.errors.required">
+                            Password is required
+                          </mat-error>
+                          <mat-error *ngIf="password.errors.minlength">
+                            Password must be at least 6 characters
+                          </mat-error>
+                        </mat-error>
+                      </mat-form-field>
+                      <div class="form-group">
+                        <button mat-raised-button
+                                type="submit"
+                                color="primary"
+                                class="form-control px-3"> Sign In
+                        </button>
+                      </div>
+                      <div class="form-group d-md-flex">
+                        <div class="w-50 text-left">
+                          <label class="checkbox-wrap checkbox-primary mb-0">Remember Me
+                            <input type="checkbox" checked>
+                            <span class="checkmark"></span>
+                          </label>
+                        </div>
+                        <div class="w-50 text-md-right">
+                          <a href="#">Forgot Password</a>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div
+                          class="alert alert-danger"
+                          role="alert"
+                          *ngIf="f.submitted && !isLoggedIn">Login failed: {{ errMsg }}
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <div class="card p-4">
+                  <div class="card-body">
+                    <h2>Welcome to Sign In</h2>
+                    <p>Don't have an account?</p>
+                    <button
+                      mat-raised-button
+                      class="btn nav-link"
+                      color="accent"
+                      routerLink="/register">Sign Up</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</ion-content>

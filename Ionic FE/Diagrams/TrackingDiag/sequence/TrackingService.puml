@@ -1,0 +1,32 @@
+@startuml
+hide footbox
+
+actor User
+boundary ProductListPage as plist
+boundary NavbarComponent as nav
+participant TrackerService as track <<Service>>
+participant sessionAPI
+
+User -> plist: Click on \ndiscount product [ X ]
+activate plist
+plist -> track: timestamp("Clicked on Product",\nproductID,"Discount")
+activate track
+plist -->User: Redirect("Product: X")
+deactivate plist
+
+opt Session
+  User -[hidden]> nav**
+  User -> nav: logout()
+  nav -> track:endSession()
+  track -> sessionAPI: POST() \n"/session/save"
+  alt Success
+    sessionAPI -> track: httpResponse(200) \nsession
+    track -> nav: session
+    nav --> User: redirect ("login")
+  else Failure
+    sessionAPI -> track: httpResponse(400) \n{msg: err}
+    track -> nav: err
+  end
+end
+
+@enduml

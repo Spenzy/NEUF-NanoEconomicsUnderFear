@@ -1,0 +1,30 @@
+@startuml
+hide footbox
+
+participant UI
+participant storeRoute as dass
+control passport as pass
+entity ProuctController
+database innoDB as db
+
+UI -> dass: GET() "/store" \nAuth: Bearer token
+dass -> pass: "/product", authenticate("jwt")
+activate pass
+alt Success: Authenticated
+  dass <- pass: done(null, user)
+  dass -> ProuctController: Request Products
+  activate ProuctController
+  ProuctController -> db: getAllProducts()
+  activate db
+  ProuctController <- db: allProducts
+  deactivate db
+  dass <- ProuctController: httpResponse(200) \nallProducts
+  deactivate ProuctController
+  UI <- dass: httpResponse(200) \nallProducts
+else Failure: Unauthorized
+  dass <<-- pass:done(null,false)
+  deactivate pass
+  UI <<-- dass: http Response(401)\n Unauthorized
+end
+
+@enduml

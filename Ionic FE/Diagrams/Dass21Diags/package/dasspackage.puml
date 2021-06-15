@@ -1,0 +1,27 @@
+@startuml
+
+  package middleware #FDB0E0{
+    class passport
+  }
+  package config #F1F2F9{
+    class conf
+  }
+  package models #D4D7EC{
+    class Dass21 <<model>>
+  }
+  package routes #fec5bb{
+    class dassRoute <<route>>
+  }
+  package test #E43A50{
+    class dassTest
+  }
+
+
+
+hide members
+test .[hidden]..> config: <<use>>
+routes ..> middleware: <<use>>
+middleware ..> config: <<use>>
+routes ..> models: <<use>>
+
+@enduml
